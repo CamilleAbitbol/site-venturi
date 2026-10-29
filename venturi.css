@@ -1041,8 +1041,7 @@ a { color: inherit; text-decoration: none; }
 .appel p { max-width: 34rem; margin: 1.2rem auto 0; color: #bdbdbd; }
 .btn--blanc { border: 1.5px solid #fff; background: transparent; color: #fff; }
 .btn--blanc:hover { background: #FFFFFF; color: var(--noir); }
-.appel .btn--cuivre { box-shadow: var(--offset-button) var(--offset-button) 0 0 #fff; }
-.appel .btn--cuivre:hover { box-shadow: 2px 2px 0 0 #fff; }
+
 
 .pied { padding: 3rem 0 2.5rem; font-size: 0.875rem; color: var(--ink-faint); }
 .pied .conteneur { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; }
@@ -1175,3 +1174,20 @@ a { color: inherit; text-decoration: none; }
 .nav.colle .conteneur { background: var(--carte); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); }
 .mini-crm div:nth-child(1) em { color: #fff; }
 .mini-marque i:nth-child(2) { background: var(--noir); }
+
+/* Boutons bordeaux : halo dégradé à la place de l'ombre décalée en bloc (essai du 29.10).
+   Bordeaux franc qui se fond dans le noir, jamais dilué sur fond clair. */
+.btn--cuivre,
+.appel .btn--cuivre {
+  box-shadow: 0 6px 22px -4px rgba(137, 7, 37, 0.9), 0 0 42px -8px rgba(160, 10, 40, 0.75);
+}
+.btn--cuivre:hover:not(:disabled),
+.appel .btn--cuivre:hover:not(:disabled) {
+  box-shadow: 0 8px 30px -4px rgba(137, 7, 37, 0.95), 0 0 64px -6px rgba(160, 10, 40, 0.85);
+}
+.btn--cuivre:active:not(:disabled),
+.appel .btn--cuivre:active:not(:disabled) {
+  box-shadow: 0 3px 12px -4px rgba(109, 7, 26, 0.9), 0 0 24px -10px rgba(137, 7, 37, 0.7);
+}
+.offset-press:hover:not(:disabled) { transform: translateY(-2px); }
+.offset-press:active:not(:disabled) { transform: translateY(1px) scale(0.98); }
