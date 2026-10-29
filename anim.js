@@ -152,11 +152,57 @@
       ctx.globalAlpha = 1;
     };
 
+    /* Variante « espace » (?espace dans l'adresse) : les étoiles viennent du fond,
+       depuis derrière la VSL, et grossissent en filant vers l'écran. */
+    const espace = new URLSearchParams(location.search).has('espace');
+    const fuite = { x: 0, y: 0 };
+    let avant = 0;
+    const etoile = (s = {}, loin = true) => Object.assign(s, {
+      x: (Math.random() - 0.5) * 3.4, y: (Math.random() - 0.5) * 3.4,
+      z: loin ? 1 : 0.05 + Math.random() * 0.95, e: true,
+    });
+    const placerFuite = () => {
+      const r = boite.getBoundingClientRect();
+      const v = document.querySelector('.vsl')?.getBoundingClientRect();
+      fuite.x = v ? v.left + v.width / 2 - r.left : L / 2;
+      fuite.y = v ? v.top + v.height / 2 - r.top : H / 2;
+    };
+    const dessinerEspace = (t) => {
+      const dt = Math.min(50, t - avant || 16); avant = t;
+      ctx.clearRect(0, 0, L, H);
+      ctx.globalCompositeOperation = 'lighter';
+      regard.x += (vise.x - regard.x) * 0.04;
+      regard.y += (vise.y - regard.y) * 0.04;
+      const cx = fuite.x - regard.x * 60, cy = fuite.y - regard.y * 60;
+      const f = Math.max(L, H) * 0.32;
+      ctx.lineCap = 'round';
+      for (const s of points) {
+        if (!s.e) etoile(s, false);
+        const pz = s.z;
+        s.z -= dt * 0.00011;
+        const x = cx + (s.x / s.z) * f, y = cy + (s.y / s.z) * f;
+        if (s.z <= 0.02 || x < -40 || x > L + 40 || y < -40 || y > H + 40) { etoile(s); continue; }
+        const px = cx + (s.x / pz) * f, py = cy + (s.y / pz) * f;
+        const pres = 1 - s.z;
+        ctx.globalAlpha = Math.min(1, pres * pres * 1.4 + 0.3);
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 1 + pres * pres * 3.4;
+        ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(x, y); ctx.stroke();
+        if (pres > 0.55) {
+          const taille = pres * pres * 26;
+          ctx.drawImage(floue, x - taille / 2, y - taille / 2, taille, taille);
+        }
+      }
+      ctx.globalAlpha = 1;
+    };
+
     dimensionner();
-    new ResizeObserver(dimensionner).observe(boite);
-    if (calme) { dessiner(0); return; }
+    if (espace) placerFuite();
+    new ResizeObserver(() => { dimensionner(); if (espace) placerFuite(); }).observe(boite);
+    const peindre = espace ? dessinerEspace : dessiner;
+    if (calme) { peindre(0); return; }
     let visible = false, boucle = 0;
-    const tour = (t) => { dessiner(t); boucle = visible ? requestAnimationFrame(tour) : 0; };
+    const tour = (t) => { peindre(t); boucle = visible ? requestAnimationFrame(tour) : 0; };
     new IntersectionObserver(([e]) => {
       visible = e.isIntersecting;
       if (visible && !boucle) boucle = requestAnimationFrame(tour);
