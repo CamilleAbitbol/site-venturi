@@ -85,28 +85,32 @@
   }, { passive: true });
   auDefilement();
 
-  /* 3 bis. Espace dans le grand cercle du hero : les étoiles viennent du fond, depuis
-            derrière la VSL, et grossissent en filant tout doucement vers l'écran.
-            Le curseur décale un peu le point de fuite. */
-  const toile = document.querySelector('.espace');
-  if (toile) {
+  /* 3 bis. Espace (grand cercle du hero, bandeau d'audit) : les étoiles viennent du
+            fond et grossissent en filant tout doucement vers l'écran. Le point de
+            fuite est le centre de data-fuite (la VSL) ou du cadre ; le curseur le
+            décale un peu. */
+  const halo = document.createElement('canvas');
+  halo.width = halo.height = 128;
+  {
+    const c = halo.getContext('2d');
+    const g = c.createRadialGradient(64, 64, 0, 64, 64, 64);
+    g.addColorStop(0, 'rgba(255,255,255,0.5)');
+    g.addColorStop(0.18, 'rgba(255,236,214,0.3)');
+    g.addColorStop(1, 'rgba(255,236,214,0)');
+    c.fillStyle = g;
+    c.fillRect(0, 0, 128, 128);
+  }
+  let vise = { x: 0, y: 0 };
+  if (!calme) addEventListener('pointermove', (e) => {
+    vise = { x: e.clientX / innerWidth - 0.5, y: e.clientY / innerHeight - 0.5 };
+  }, { passive: true });
+
+  document.querySelectorAll('.espace').forEach((toile) => {
     const ctx = toile.getContext('2d');
     const boite = toile.parentElement;
-    const halo = document.createElement('canvas');
-    halo.width = halo.height = 128;
-    {
-      const c = halo.getContext('2d');
-      const g = c.createRadialGradient(64, 64, 0, 64, 64, 64);
-      g.addColorStop(0, 'rgba(255,255,255,0.5)');
-      g.addColorStop(0.18, 'rgba(255,236,214,0.3)');
-      g.addColorStop(1, 'rgba(255,236,214,0)');
-      c.fillStyle = g;
-      c.fillRect(0, 0, 128, 128);
-    }
     let L = 0, H = 0, avant = 0;
     const etoiles = [];
     const fuite = { x: 0, y: 0 }, regard = { x: 0, y: 0 };
-    let vise = { x: 0, y: 0 };
 
     const naitre = (s = {}, loin = true) => Object.assign(s, {
       x: (Math.random() - 0.5) * 3.4, y: (Math.random() - 0.5) * 3.4,
@@ -121,7 +125,7 @@
       while (etoiles.length < n) etoiles.push(naitre({}, false));
       etoiles.length = n;
       const r = boite.getBoundingClientRect();
-      const v = document.querySelector('.vsl')?.getBoundingClientRect();
+      const v = toile.dataset.fuite && document.querySelector(toile.dataset.fuite)?.getBoundingClientRect();
       fuite.x = v ? v.left + v.width / 2 - r.left : L / 2;
       fuite.y = v ? v.top + v.height / 2 - r.top : H / 2;
     };
@@ -157,9 +161,6 @@
     new ResizeObserver(dimensionner).observe(boite);
     if (calme) dessiner(0);
     else {
-      addEventListener('pointermove', (e) => {
-        vise = { x: e.clientX / innerWidth - 0.5, y: e.clientY / innerHeight - 0.5 };
-      }, { passive: true });
       let visible = false, boucle = 0;
       const tour = (t) => { dessiner(t); boucle = visible ? requestAnimationFrame(tour) : 0; };
       new IntersectionObserver(([e]) => {
@@ -167,7 +168,7 @@
         if (visible && !boucle) boucle = requestAnimationFrame(tour);
       }).observe(boite);
     }
-  }
+  });
 
   if (calme) return;
 
