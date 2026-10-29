@@ -47,12 +47,13 @@
   /* Le hero s'anime dès le chargement */
   requestAnimationFrame(() => document.querySelectorAll('.hero .revele, .hero [data-mots]').forEach((el) => el.classList.add('vu')));
 
-  /* 3. Effets liés au défilement : nav, progression, VSL, ligne de méthode */
+  /* 3. Effets liés au défilement : nav, progression, VSL, ligne de méthode, arc final */
   const nav = document.querySelector('.nav');
   const barre = document.querySelector('.progression');
   const vsl = document.querySelector('.vsl');
   const ligne = document.querySelector('.methode');
   const pas = [...document.querySelectorAll('.pas')];
+  const appel = document.querySelector('.appel');
   const borne = (x) => Math.min(1, Math.max(0, x));
 
   const auDefilement = () => {
@@ -70,6 +71,10 @@
       const p = borne((h * 0.8 - r.top) / (r.height + h * 0.3));
       ligne.style.setProperty('--p', p);
       pas.forEach((el, i) => el.classList.toggle('actif', p >= i / pas.length + 0.02));
+    }
+    if (appel) {
+      const r = appel.getBoundingClientRect();
+      appel.style.setProperty('--p', borne((h - r.top) / h));
     }
   };
   let attente = false;
