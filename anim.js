@@ -100,8 +100,8 @@
     c.fillRect(0, 0, 128, 128);
     return s;
   };
-  const nette = lueur(1, 0.55);
-  const floue = lueur(0.35, 0.22);
+  const nette = lueur(1, 0.7);
+  const floue = lueur(0.5, 0.3);
   let vise = { x: 0, y: 0 };
   if (!calme) addEventListener('pointermove', (e) => {
     vise = { x: e.clientX / innerWidth - 0.5, y: e.clientY / innerHeight - 0.5 };
@@ -126,7 +126,7 @@
       L = boite.clientWidth; H = boite.clientHeight;
       toile.width = L * dpr; toile.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.round(Math.min(160, L * H / densite));
+      const n = Math.round(Math.min(480, L * H / densite));
       while (points.length < n) points.push(naitre());
       points.length = n;
       points.sort((a, b) => a.z - b.z);
@@ -144,9 +144,9 @@
         const decal = 6 + p.z * 46;
         const x = p.x * L - regard.x * decal;
         const y = p.y * H - regard.y * decal;
-        const taille = 3 + p.z * p.z * 34;
+        const taille = 2.5 + p.z * p.z * 46;
         const scintille = 0.55 + 0.45 * Math.sin(t / 1000 * p.pouls + p.phase);
-        ctx.globalAlpha = (0.25 + p.z * 0.6) * scintille;
+        ctx.globalAlpha = Math.min(1, (0.4 + p.z * 0.75) * scintille);
         ctx.drawImage(p.z > 0.72 ? floue : nette, x - taille / 2, y - taille / 2, taille, taille);
       }
       ctx.globalAlpha = 1;
