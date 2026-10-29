@@ -1001,7 +1001,8 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   padding: clamp(4rem, 9vw, 7rem) clamp(1.5rem, 5vw, 4rem);
   border-radius: var(--rayon-cadre);
-  background: var(--nuit);
+  background: var(--surface);
+  box-shadow: 0 0 70px -12px rgba(137, 7, 37, 0.75), 0 0 22px -6px rgba(137, 7, 37, 0.6);
   color: #fff;
   text-align: center;
   overflow: hidden;
