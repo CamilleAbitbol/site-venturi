@@ -1,0 +1,698 @@
+/* =============================================================================
+   VENTURI — couche de marque posée sur kit.css
+   =============================================================================
+
+   Palette décidée par Ryann le 15.10.2026 : blanc, bordeaux, noir. RIEN D'AUTRE.
+
+   PAS DE ROSE. Un bordeaux dilué sur du blanc devient rose : aucun
+   `color-mix(bordeaux, transparent)` ni bordeaux transparent sur fond blanc.
+   Le bordeaux est plein, ou il est posé sur du noir (où il reste bordeaux).
+   Les mélanges du kit qui tiraient au rose sont neutralisés ci-dessous.
+
+   Inspiration de mise en page : ia.velarmarketing.com (halo en arc, titres
+   centrés, pilules, rangées alternées avec maquettes d'interface), passée sur
+   fond blanc. Les maquettes restent noires : c'est là que le bordeaux peut
+   briller sans virer au rose.
+   ========================================================================== */
+
+:root {
+  --copper: #890725;        /* bordeaux principal */
+  --copper-dark: #6d071a;   /* survol, enfoncé */
+  --ink: #111111;
+  --ink-soft: #444444;
+  --ink-faint: #8a8a8a;
+  --surface: #ffffff;
+  --cream: #ffffff;
+  --sand: #ffffff;
+  --desk: #ffffff;
+  --line: #e6e6e6;
+  --ghost: #cfcfcf;
+  --nuit: #0b0b0b;          /* fond des maquettes */
+  --nuit-2: #161616;
+
+  /* Le L adouci du kit était en cuivre à 30 % : en bordeaux, c'est du rose.
+     Ici le filet est gris et l'ombre dure est noire. */
+  --filet-cuivre: var(--ink);
+  --relief-cuivre: 5px 5px 0 0 var(--ink), var(--relief);
+  --relief-cuivre-cadre: 6px 6px 0 0 var(--ink), var(--relief-cadre);
+  --relief-cuivre-plein: 5px 5px 0 0 var(--copper), var(--relief);
+
+  --relief: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 32px rgba(0, 0, 0, 0.07);
+  --relief-cadre: 0 1px 2px rgba(0, 0, 0, 0.05), 0 26px 64px rgba(0, 0, 0, 0.1);
+
+  --largeur: 72rem;
+}
+
+html { scroll-behavior: smooth; }
+body { background: #fff; overflow-x: clip; }
+a { color: inherit; text-decoration: none; }
+
+/* Neutralisation des teintes roses du kit */
+.vif { box-shadow: inset 0 -0.14em 0 0 var(--copper); color: var(--ink); }
+.vignette { background: var(--ink); color: #fff; }
+.badge { background: #fff; }
+
+.conteneur {
+  width: min(var(--largeur), 100% - 2 * clamp(1rem, 4vw, 2.5rem));
+  margin-inline: auto;
+}
+
+
+/* ---------------------------------------------------------------------------
+   NAVIGATION
+   ------------------------------------------------------------------------ */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .conteneur {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4.25rem;
+}
+.nav-liens { display: flex; gap: 2rem; }
+.nav-liens a {
+  font-family: var(--display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  transition: color var(--duree) ease;
+}
+.nav-liens a:hover { color: var(--copper); }
+.nav-actions { display: flex; gap: 0.75rem; align-items: center; }
+.marqueSigne { color: var(--copper); }
+
+
+/* ---------------------------------------------------------------------------
+   HERO — le halo en arc de Velar, en trait bordeaux sur blanc
+   ------------------------------------------------------------------------ */
+
+.hero {
+  position: relative;
+  padding: clamp(4rem, 10vw, 7.5rem) 0 clamp(3rem, 6vw, 5rem);
+  text-align: center;
+  isolation: isolate;
+  overflow: clip;
+}
+
+/* Trame de points grise, qui s'efface vers le bas */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: radial-gradient(#d4d4d4 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 30%, transparent 75%);
+}
+
+.arc {
+  position: absolute;
+  left: 50%;
+  top: clamp(30rem, 40vw, 44rem);
+  z-index: -1;
+  width: min(1200px, 150vw);
+  aspect-ratio: 1;
+  translate: -50% 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--copper);
+  background: #fff;
+  box-shadow: 0 -18px 50px -24px rgba(0, 0, 0, 0.18);
+}
+
+.etoile {
+  position: absolute;
+  z-index: -1;
+  width: 14px;
+  height: 14px;
+  color: var(--copper);
+  animation: scintille 3.2s ease-in-out infinite;
+}
+.etoile--noire { color: var(--ink); width: 10px; height: 10px; }
+@keyframes scintille {
+  0%, 100% { opacity: 1; transform: scale(1) rotate(0); }
+  50% { opacity: 0.35; transform: scale(0.7) rotate(45deg); }
+}
+
+.pilule-hero {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem 0.45rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: var(--relief);
+  font-family: var(--display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.pilule-hero b {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--copper);
+  color: #fff;
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 1.75rem auto 0;
+  max-width: 15ch;
+  font-size: clamp(2.6rem, 7.2vw, 5.4rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+.hero h1 em {
+  display: block;
+  color: var(--copper);
+  font-style: italic;
+}
+.hero .sous-titre {
+  max-width: 34rem;
+  margin: 1.5rem auto 0;
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  color: var(--ink-soft);
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2.25rem;
+}
+.hero-note {
+  margin-top: 1.1rem;
+  font-size: 0.875rem;
+  color: var(--ink-faint);
+}
+.hero-note .chiffre { font-size: 1rem; color: var(--ink); }
+
+.garanties-ligne {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem 1.75rem;
+  margin-top: 2rem;
+  font-family: var(--display);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.garanties-ligne span { display: inline-flex; align-items: center; gap: 0.5rem; }
+.garanties-ligne svg { width: 1.05rem; height: 1.05rem; color: var(--copper); }
+
+
+/* ---------------------------------------------------------------------------
+   ÉCRAN — la maquette noire sous le hero
+   ------------------------------------------------------------------------ */
+
+.ecran {
+  position: relative;
+  max-width: 62rem;
+  margin: clamp(3rem, 7vw, 5rem) auto 0;
+  padding: clamp(0.6rem, 1.4vw, 0.9rem);
+  border-radius: var(--rayon-cadre);
+  background: var(--nuit);
+  box-shadow: 8px 8px 0 0 var(--copper), var(--relief-cadre);
+  overflow: hidden;
+  isolation: isolate;
+}
+.ecran::before {
+  content: "";
+  position: absolute;
+  inset: -40% -10% auto;
+  height: 90%;
+  z-index: -1;
+  background: radial-gradient(ellipse at 50% 100%, rgba(137, 7, 37, 0.85), transparent 65%);
+}
+.navigateur {
+  border-radius: calc(var(--rayon-cadre) - 8px);
+  background: #fff;
+  overflow: hidden;
+  text-align: left;
+}
+.navigateur-barre {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+.navigateur-barre i {
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+  background: var(--ghost);
+}
+.navigateur-barre i:first-child { background: var(--copper); }
+.navigateur-adresse {
+  flex: 1;
+  max-width: 20rem;
+  margin: 0 auto;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: #f3f3f3;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--ink-soft);
+}
+.navigateur-page {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  min-height: clamp(16rem, 34vw, 24rem);
+}
+.navigateur-texte {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: clamp(1.25rem, 4vw, 3rem);
+}
+.navigateur-texte small {
+  font-family: var(--display);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.navigateur-texte strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.25rem, 3vw, 2.1rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+.ligne-fantome {
+  height: 0.55rem;
+  border-radius: 999px;
+  background: #ececec;
+}
+.navigateur-boutons { display: flex; gap: 0.5rem; margin-top: 0.4rem; }
+.navigateur-boutons span {
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+.navigateur-boutons span:first-child { background: var(--ink); color: #fff; }
+.navigateur-photo {
+  position: relative;
+  background:
+    linear-gradient(160deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.45)),
+    url("https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=1200&q=70&auto=format") center / cover;
+}
+.navigateur-photo span {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  padding: 0.45rem 0.8rem;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  box-shadow: var(--relief);
+}
+.navigateur-photo span b { color: var(--copper); }
+
+
+/* ---------------------------------------------------------------------------
+   SECTIONS
+   ------------------------------------------------------------------------ */
+
+.bloc { padding: clamp(4.5rem, 10vw, 8rem) 0; }
+.bloc--trait { border-top: 1px solid var(--line); }
+
+.entete {
+  max-width: 44rem;
+  margin: 0 auto clamp(2.5rem, 6vw, 4rem);
+  text-align: center;
+}
+.entete h2 {
+  margin-top: 1.25rem;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+.entete h2 em { color: var(--copper); font-style: italic; }
+.entete p {
+  max-width: 34rem;
+  margin: 1.1rem auto 0;
+  color: var(--ink-soft);
+}
+
+.etiquette {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 999px;
+  font-family: var(--display);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.etiquette svg { width: 0.9rem; height: 0.9rem; color: var(--copper); }
+
+
+/* Trois étapes */
+.etapes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+.etape {
+  position: relative;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--line);
+  border-radius: var(--rayon-lg);
+  background: #fff;
+  box-shadow: var(--relief);
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+.etape:hover {
+  transform: translate(-3px, -3px);
+  border-color: var(--ink);
+  box-shadow: 6px 6px 0 0 var(--copper), var(--relief);
+}
+.etape .numero {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  font-family: var(--chiffres);
+  font-size: 2.75rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--line);
+}
+.etape .vignette { width: 2.75rem; height: 2.75rem; border-radius: 12px; }
+.etape h3 { margin-top: 1.4rem; font-size: 1.3rem; }
+.etape p { margin: 0.6rem 0 0; color: var(--ink-soft); font-size: 0.95rem; }
+
+
+/* Rangées alternées : maquette noire + texte */
+.rangee {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+.rangee + .rangee { margin-top: clamp(4rem, 9vw, 7rem); }
+.rangee--inverse .maquette { order: 2; }
+
+.rangee-texte .eyebrow { color: var(--copper); }
+.rangee-texte h3 {
+  margin-top: 0.9rem;
+  font-size: clamp(1.75rem, 3.6vw, 2.6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+.rangee-texte h3 em { color: var(--copper); font-style: italic; }
+.rangee-texte p { margin: 1rem 0 0; color: var(--ink-soft); }
+.coches { margin: 1.4rem 0 0; padding: 0; list-style: none; display: grid; gap: 0.6rem; }
+.coches li { display: flex; gap: 0.7rem; align-items: center; font-weight: 500; }
+.coches li::before {
+  content: "";
+  flex: 0 0 1.25rem;
+  height: 1.25rem;
+  border-radius: 6px;
+  background: var(--copper) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 0.8rem no-repeat;
+}
+.prix-poste {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-top: 1.6rem;
+  font-size: 0.875rem;
+  color: var(--ink-faint);
+}
+.prix-poste .chiffre { font-size: 1.6rem; }
+
+.maquette {
+  position: relative;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border-radius: var(--rayon-cadre);
+  background: var(--nuit);
+  color: #fff;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow: var(--relief-cadre);
+  min-height: 21rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.maquette::before {
+  content: "";
+  position: absolute;
+  width: 70%;
+  aspect-ratio: 1;
+  right: -15%;
+  top: -25%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(137, 7, 37, 0.9), transparent 68%);
+  filter: blur(10px);
+  animation: respire 7s ease-in-out infinite;
+}
+.rangee--inverse .maquette::before { right: auto; left: -15%; }
+@keyframes respire {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.9; }
+  50% { transform: scale(1.15) translate(-4%, 6%); opacity: 1; }
+}
+.panneau {
+  border: 1px solid #2a2a2a;
+  border-radius: 14px;
+  background: rgba(22, 22, 22, 0.88);
+  padding: 1rem 1.1rem;
+}
+.panneau + .panneau { margin-top: 0.75rem; }
+.panneau-titre {
+  font-family: var(--display);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8a8a8a;
+}
+.panneau-ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #262626;
+  font-size: 0.875rem;
+}
+.panneau-ligne:last-child { border-bottom: 0; padding-bottom: 0; }
+.panneau-ligne b { font-family: var(--chiffres); font-weight: 700; }
+.pastille-nuit {
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: var(--copper);
+  font-size: 0.6875rem;
+  font-weight: 700;
+}
+.creneaux { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.45rem; margin-top: 0.8rem; }
+.creneaux span {
+  padding: 0.5rem 0;
+  border: 1px solid #333;
+  border-radius: 9px;
+  text-align: center;
+  font-family: var(--chiffres);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #cfcfcf;
+}
+.creneaux span.pris { border-color: var(--copper); background: var(--copper); color: #fff; }
+.carte-cadeau {
+  position: relative;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #890725, #4a0310);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  transform: rotate(-3deg);
+}
+.carte-cadeau small { font-family: var(--display); font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8; }
+.carte-cadeau strong { display: block; margin-top: 1.6rem; font-family: var(--chiffres); font-size: 2.6rem; font-weight: 900; line-height: 1; }
+.carte-cadeau p { margin: 0.5rem 0 0; font-size: 0.8125rem; opacity: 0.85; }
+.maquette .champ {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #2f2f2f;
+  border-radius: 12px;
+  background: #121212;
+  font-size: 0.875rem;
+  color: #9a9a9a;
+}
+.maquette .champ span:last-child {
+  padding: 0.35rem 0.75rem;
+  border-radius: 9px;
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.stats .panneau { margin: 0; }
+.stats b { display: block; margin-top: 0.4rem; font-family: var(--chiffres); font-size: 1.9rem; font-weight: 900; }
+.barres { display: flex; align-items: flex-end; gap: 0.4rem; height: 4.5rem; margin-top: 0.9rem; }
+.barres i { flex: 1; border-radius: 4px 4px 0 0; background: #2c2c2c; }
+.barres i:last-child { background: var(--copper); }
+
+
+/* Défilé des métiers */
+.defile {
+  padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+  border-block: 1px solid var(--line);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.defile-piste {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: defile 38s linear infinite;
+}
+.defile:hover .defile-piste { animation-play-state: paused; }
+.defile-piste + .defile-piste { margin-top: 1rem; animation-direction: reverse; animation-duration: 44s; }
+@keyframes defile { to { transform: translateX(-50%); } }
+.metier {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.4rem;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--rayon);
+  background: #fff;
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.metier::before { content: "✦"; color: var(--copper); }
+.metier--plein { background: var(--ink); color: #fff; }
+
+
+/* Garanties */
+.garanties {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+.garantie {
+  display: flex;
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border: 1px solid var(--line);
+  border-radius: var(--rayon-lg);
+  background: #fff;
+  box-shadow: var(--relief);
+}
+.garantie .vignette { flex: 0 0 auto; width: 2.75rem; height: 2.75rem; border-radius: 12px; background: var(--copper); }
+.garantie h3 { font-size: 1.15rem; }
+.garantie p { margin: 0.45rem 0 0; font-size: 0.95rem; color: var(--ink-soft); }
+
+
+/* Bandeau d'appel — l'encre a droit au bandeau, pas à la section */
+.appel {
+  position: relative;
+  padding: clamp(3.5rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+  border-radius: var(--rayon-cadre);
+  background: var(--nuit);
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+.appel::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -60%;
+  width: 120%;
+  aspect-ratio: 2;
+  translate: -50% 0;
+  z-index: -1;
+  border-radius: 50%;
+  border-top: 1.5px solid var(--copper);
+  background: radial-gradient(ellipse at 50% 0%, rgba(137, 7, 37, 0.75), transparent 60%);
+}
+.appel h2 {
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+.appel h2 em { font-style: italic; color: #fff; text-decoration: underline; text-decoration-color: var(--copper); text-decoration-thickness: 0.08em; text-underline-offset: 0.12em; }
+.appel p { max-width: 30rem; margin: 1.2rem auto 0; color: #bdbdbd; }
+.appel .hero-actions { margin-top: 2rem; }
+.btn--blanc {
+  border: 1.5px solid #fff;
+  background: transparent;
+  color: #fff;
+}
+.btn--blanc:hover { background: #fff; color: var(--ink); }
+.appel .btn--cuivre { box-shadow: var(--offset-button) var(--offset-button) 0 0 #fff; }
+.appel .btn--cuivre:hover { box-shadow: 2px 2px 0 0 #fff; }
+
+
+/* Pied de page */
+.pied {
+  padding: 3rem 0 2.5rem;
+  font-size: 0.875rem;
+  color: var(--ink-faint);
+}
+.pied .conteneur {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.pied .marque { font-size: 1.15rem; color: var(--ink); }
+.pied nav { display: flex; gap: 1.5rem; }
+.pied nav a:hover { color: var(--copper); }
+
+
+/* Entrées douces au défilement */
+.monte { opacity: 0; transform: translateY(24px); transition: opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1); }
+.monte.vu { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .monte { opacity: 1; transform: none; }
+  *, *::before, *::after { animation: none !important; }
+}
+
+
+/* ---------------------------------------------------------------------------
+   MOBILE
+   ------------------------------------------------------------------------ */
+
+@media (max-width: 860px) {
+  .nav-liens { display: none; }
+  .etapes, .garanties { grid-template-columns: 1fr; }
+  .rangee { grid-template-columns: 1fr; }
+  .rangee--inverse .maquette { order: 0; }
+  .maquette { min-height: 0; }
+  .navigateur-page { grid-template-columns: 1fr; }
+  .navigateur-photo { min-height: 11rem; }
+  .nav-actions .btn--contour { display: none; }
+}

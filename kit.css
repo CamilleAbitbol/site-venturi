@@ -1,0 +1,484 @@
+/* =============================================================================
+   NÉO-BRUTALISM — kit portable
+   =============================================================================
+
+   Fork de `brutalism-editorial.css`, extrait le 23.09.2026 de la page d'offre
+   d'agenceWeb après une session de réglage avec Ryann. Même palette, même
+   typographie, même ombre dure — mais la règle du rayon zéro est levée.
+
+   ---------------------------------------------------------------------------
+   LA RÈGLE QUI SÉPARE LES DEUX KITS
+   ---------------------------------------------------------------------------
+
+        Ce qui se clique ou s'étiquette est BRUTAL.
+        Ce qui contient est DOUX.
+
+   - brutal : bouton, badge, pastille. Bordure d'encre épaisse, ombre dure
+     décalée sans flou, capitales Archivo espacées, enfoncement au clic.
+   - doux : carte, cadre, panneau, total. Coins arrondis de 14 à 22 px, filet
+     de 1 px, ombre large et diffuse, fond crème.
+
+   Le contraste entre les deux est le style. Tout passer en dur donne le kit
+   d'origine ; tout passer en doux donne un gabarit SaaS générique.
+
+   UNE EXCEPTION, décidée par Ryann le 15.10.2026 : le L CUIVRE ADOUCI.
+   Un contenant peut porter une ombre dure, à condition qu'elle soit pâle —
+   cuivre à 30 %, posée par-dessus l'ombre diffuse, avec un filet cuivré.
+   C'est le geste du devis d'Abi (`.offset-edge` du kit éditorial), passé au
+   doux. Classe `.carte--cuivre` (ou `.cadre--cuivre`). Sur ce qui se COCHE,
+   le L passe en cuivre plein : `.carte--cuivre.choisie`, ou automatiquement
+   quand la carte contient une case cochée.
+
+   ---------------------------------------------------------------------------
+   POSE
+   ---------------------------------------------------------------------------
+
+   Copier ce fichier dans le projet, l'importer avant tout autre CSS. Il ne
+   dépend de rien — pas de Tailwind, pas de build, pas de `@import` de polices.
+
+   Les polices se branchent par next/font, qui les sert depuis le domaine du
+   site au lieu d'un aller-retour vers Google :
+
+        import { Archivo, Sora, Bricolage_Grotesque } from "next/font/google";
+        const display  = Archivo({ subsets: ["latin"], variable: "--font-display" });
+        const body     = Sora({ subsets: ["latin"], variable: "--font-body" });
+        const chiffres = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-chiffres" });
+
+   Trois polices et non deux : les CHIFFRES ont la leur. Un montant est ce que
+   le lecteur cherche en premier sur une page commerciale, et Bricolage a des
+   chiffres plus larges et plus ronds qu'Archivo à poids égal.
+
+   ---------------------------------------------------------------------------
+   LES SIX RÈGLES
+   ---------------------------------------------------------------------------
+
+   1. LE RAYON EST DOUX SUR LES CONTENANTS, ABSENT DES ÉTIQUETTES. 14 px pour
+      une carte, 18-22 px pour un cadre, 999 px pour une pastille ronde. Un
+      bouton garde le rayon de sa famille, jamais plus.
+
+   2. DEUX FAMILLES D'OMBRES, JAMAIS MÉLANGÉES SUR LE MÊME ÉLÉMENT.
+      - dure : `5px 5px 0 0` en encre ou en cuivre, sur ce qui se clique ;
+      - diffuse : `0 1px 2px` + `0 26px 64px` en encre très transparente, sur
+        ce qui contient.
+
+   3. LES PETITES CAPITALES ESPACÉES portent la signature, pas la police.
+      Libellés, en-têtes, badges et surtitres passent par `.eyebrow`.
+
+   4. JAMAIS DE NOIR NI DE BLANC PURS. L'encre est un brun très sombre, le
+      fond un crème chaud.
+
+   5. LE FOND DE PAGE EST PLUS CLAIR QUE LA SECTION CRÈME QU'IL CÔTOIE.
+      Mesuré le 22.09.2026 : trois essais de fond ont été refusés parce qu'ils
+      étaient plus foncés que `--cream`, et le fond se lisait alors comme une
+      bande sombre le long du cadre. C'est l'ombre diffuse qui sépare le
+      document de son support, pas le contraste de couleur.
+
+   6. L'ENCRE N'EST PAS LA COULEUR PRINCIPALE. Un aplat d'encre plein écran
+      pèse comme du noir. L'accent est le cuivre ; l'encre écrit et souligne.
+
+   À NE PAS FAIRE : police mono, dégradé saturé, ombre floue sur un bouton,
+   ombre dure PLEINE sur une carte au repos (seul le L adouci y a droit,
+   voir l'en-tête), aplat d'encre en fond de section.
+
+   ============================================================================= */
+
+
+/* -----------------------------------------------------------------------------
+   1. TOKENS
+   -------------------------------------------------------------------------- */
+
+:root {
+  /* Fonds */
+  --cream: #f4f1e9;
+  --surface: #fffdf8;
+  --sand: #ece2d3;
+  /* Le support sur lequel le document est posé. Plus clair que --cream :
+     voir la règle 5. */
+  --desk: color-mix(in srgb, var(--cream) 35%, #ffffff);
+
+  /* Texte */
+  --ink: #17140f;
+  --ink-soft: #4a4438;
+  --ink-faint: #8a8171;
+
+  /* Traits */
+  --line: #e2dac9;
+  --ghost: #cdc2ad;
+
+  /* Accent */
+  --copper: #b06a45;
+  --copper-dark: #a65a3c;
+
+  --danger: #a8321f;
+  --success: #4a7a52;
+  --warning: #b9926a;
+
+  /* Polices. Les var() sont vides par défaut : next/font les remplit. */
+  --display: var(--font-display, "Archivo"), "Helvetica Neue", Arial, sans-serif;
+  --body: var(--font-body, "Sora"), "Helvetica Neue", Arial, sans-serif;
+  --chiffres: var(--font-chiffres, "Bricolage Grotesque"), var(--display);
+
+  /* Rayons — la différence avec le kit d'origine tient dans ces trois lignes */
+  --rayon: 14px;
+  --rayon-lg: 18px;
+  --rayon-cadre: 22px;
+
+  /* Ombres dures : ce qui se clique */
+  --offset-button: 5px;
+  --offset-edge: 6px;
+
+  /* Ombre diffuse : ce qui contient */
+  --relief: 0 1px 2px rgba(23, 20, 15, 0.04), 0 12px 32px rgba(23, 20, 15, 0.07);
+  --relief-cadre: 0 1px 2px rgba(23, 20, 15, 0.05), 0 26px 64px rgba(23, 20, 15, 0.1);
+
+  /* Le L cuivre adouci (voir l'en-tête) : ombre dure pâle + ombre diffuse */
+  --filet-cuivre: color-mix(in srgb, var(--copper) 45%, var(--line));
+  --relief-cuivre: 5px 5px 0 0 color-mix(in srgb, var(--copper) 30%, transparent), var(--relief);
+  --relief-cuivre-cadre: 6px 6px 0 0 color-mix(in srgb, var(--copper) 30%, transparent), var(--relief-cadre);
+  --relief-cuivre-plein: 5px 5px 0 0 var(--copper), var(--relief);
+
+  --duree: 0.14s;
+}
+
+
+/* -----------------------------------------------------------------------------
+   2. BASE
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--desk);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+
+/* -----------------------------------------------------------------------------
+   3. SIGNATURES TYPOGRAPHIQUES
+   -------------------------------------------------------------------------- */
+
+/* Le motif le plus réutilisé du kit : libellé, surtitre, en-tête de colonne. */
+.eyebrow {
+  font-family: var(--display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.eyebrow.accent { color: var(--copper); }
+
+/* Le surlignage d'un fragment de titre. `box-decoration-break: clone` est
+   obligatoire : sans lui, un surlignage qui passe à la ligne perd son trait
+   sur le second fragment, l'ombre étant calculée sur la boîte entière. */
+.vif {
+  background: transparent;
+  color: var(--copper);
+  box-shadow: inset 0 -0.16em 0 0 color-mix(in srgb, var(--copper) 24%, transparent);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* Un chiffre n'est pas du texte : sa police, sa chasse fixe, sa couleur. */
+.chiffre {
+  font-family: var(--chiffres);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--copper);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+
+/* -----------------------------------------------------------------------------
+   4. BRUTAL — ce qui se clique et ce qui s'étiquette
+   -------------------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  padding: 0.5rem 1rem;
+  border: 1px solid;
+  border-radius: var(--rayon);
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition:
+    background-color var(--duree) ease,
+    border-color var(--duree) ease,
+    color var(--duree) ease;
+}
+
+.btn:disabled { cursor: not-allowed; opacity: 0.45; }
+
+.btn svg { width: 1em; height: 1em; }
+
+/* L'action principale. L'ombre est en ENCRE sous un bouton cuivre : une ombre
+   cuivre sous un aplat cuivre ne se voit pas. */
+.btn--cuivre {
+  border-color: var(--copper);
+  background: var(--copper);
+  color: var(--surface);
+  box-shadow: var(--offset-button) var(--offset-button) 0 0 var(--ink);
+}
+.btn--cuivre:hover:not(:disabled) {
+  background: var(--copper-dark);
+  border-color: var(--copper-dark);
+  box-shadow: 2px 2px 0 0 var(--ink);
+}
+.btn--cuivre:active:not(:disabled) { box-shadow: 0 0 0 0 var(--ink); }
+
+/* L'action secondaire : visible, sans relief. Deux boutons en relief côte à
+   côte ne hiérarchisent plus rien. */
+.btn--contour {
+  border: 1.5px solid var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+}
+.btn--contour:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--surface);
+}
+
+/* Le « petit » etait PLUS GRAND que la base — 0.62rem de rembourrage contre
+   0.5rem — depuis l'extraction du kit. Corrige le 29.09.2026, Ryann : « les
+   boutons sont enormes ». Un modificateur qui grossit ce qu'il pretend reduire
+   se voit d'autant moins qu'on lui fait confiance : personne ne releve la
+   taille d'un bouton marque `--sm`.
+
+   La graisse de lettre descend aussi : a 0.18em, un libelle de trois mots en
+   capitales occupe une ligne entiere sur un ecran dense. */
+.btn--sm { padding: 0.35rem 0.75rem; font-size: 0.62rem; letter-spacing: 0.12em; }
+.btn--lg { padding: 0.95rem 1.6rem; font-size: 0.78125rem; }
+
+/* L'enfoncement : l'ombre et la translation se synchronisent pour que le
+   bouton descende exactement de la distance de son ombre. */
+.offset-press {
+  transition:
+    box-shadow var(--duree) ease,
+    transform var(--duree) ease,
+    background-color var(--duree) ease,
+    border-color var(--duree) ease;
+}
+.offset-press:hover:not(:disabled) { transform: translate(3px, 3px); }
+.offset-press:active:not(:disabled) {
+  transform: translate(var(--offset-button), var(--offset-button));
+}
+
+/* Le badge : le SEUL élément incliné de la page. Deux éléments inclinés se
+   lisent comme un gabarit, un seul se lit comme un geste. */
+.badge {
+  display: inline-block;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--rayon);
+  background: var(--sand);
+  box-shadow: 3px 3px 0 0 var(--ink);
+  transform: rotate(-1.2deg);
+  font-family: var(--display);
+  font-size: clamp(0.7rem, 1.6vw, 0.8125rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* La marque : le signe et le mot, alignes par le centrage du conteneur et
+   non par un `vertical-align` devine. Le viewBox du signe est cale sur son
+   trace, sans marge — c'est ce qui rend l'alignement exact. */
+.marque {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--display);
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.marqueSigne {
+  width: 1.05em;
+  height: auto;
+  color: var(--copper);
+}
+
+/* La pilule : ce qui est offert, un état, une famille. Contour cuivre, jamais
+   d'aplat — un aplat en ferait un bouton. */
+.pilule {
+  display: inline-block;
+  margin: 0 0.5rem 0.5rem 0;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--copper);
+  border-radius: 999px;
+  color: var(--copper);
+  font-family: var(--display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* La pastille numérotée : un ordre, pas une décoration. Ronde, parce que le
+   carré est pris par la vignette d'icône. */
+.pastille {
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 1.5px solid var(--copper);
+  border-radius: 999px;
+  color: var(--copper);
+  font-family: var(--chiffres);
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+/* La vignette d'icône : carrée à coins doux, fond cuivre très dilué. */
+.vignette {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--copper) 12%, transparent);
+  color: var(--copper);
+}
+.vignette svg { width: 1.2rem; height: 1.2rem; }
+
+
+/* -----------------------------------------------------------------------------
+   5. DOUX — ce qui contient
+   -------------------------------------------------------------------------- */
+
+/* Le cadre : la page posée SUR une surface, jamais en train de la remplir.
+   `overflow: clip` et non `hidden` — hidden ferait un conteneur de défilement
+   et une barre collante à l'intérieur cesserait de coller. */
+.cadre {
+  display: block;
+  max-width: 72rem;
+  margin: clamp(0.6rem, 2vw, 2rem) auto;
+  border: 1px solid var(--line);
+  border-radius: clamp(var(--rayon), 1.8vw, var(--rayon-cadre));
+  background: var(--surface);
+  overflow: clip;
+  box-shadow: var(--relief-cadre);
+}
+
+.carte {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--line);
+  border-radius: var(--rayon-lg);
+  background: var(--surface);
+  box-shadow: var(--relief);
+}
+
+/* DES blocs, pas UN bloc : une grande carte à lignes séparées par des filets
+   est plate par construction. Ce qui s'achète d'un tenant va dans une carte ;
+   ce qui se choisit ligne à ligne va dans des cartes séparées. */
+.carte--liste {
+  padding: clamp(0.9rem, 2.5vw, 1.15rem) clamp(1rem, 3vw, 1.5rem);
+  border-radius: var(--rayon);
+}
+
+/* Le L cuivre adouci — l'exception de l'en-tête. Au repos : pâle. Choisie
+   (classe, ou case cochée dedans) : cuivre plein, c'est alors un objet qui se
+   clique et il a droit à l'ombre franche. Mesuré sur la page d'offre et le
+   devis de L'Étang le 15.10.2026, validé par Ryann. */
+.carte--cuivre,
+.cadre--cuivre {
+  border-color: var(--filet-cuivre);
+  box-shadow: var(--relief-cuivre);
+  transition: border-color var(--duree) ease, box-shadow var(--duree) ease;
+}
+.cadre--cuivre { box-shadow: var(--relief-cuivre-cadre); }
+.carte--cuivre.choisie,
+.carte--cuivre:has(input:checked) {
+  border-color: var(--copper);
+  box-shadow: var(--relief-cuivre-plein);
+}
+
+.section { padding: clamp(2.5rem, 7vw, 4.5rem) 0; }
+.section--creme { background: var(--cream); }
+
+/* Un titre de section : centré, souligné d'un trait cuivre — le même geste
+   que `.vif`, réduit à une barre puisqu'il n'y a pas de mot à distinguer. */
+.titre-section {
+  margin: 0 0 clamp(1.5rem, 3.5vw, 2.25rem);
+  text-align: center;
+  font-size: clamp(1.7rem, 4.2vw, 2.2rem);
+  letter-spacing: -0.025em;
+}
+.titre-section::after {
+  content: "";
+  display: block;
+  width: 3.25rem;
+  height: 0.28rem;
+  margin: 0.85rem auto 0;
+  border-radius: 999px;
+  background: var(--copper);
+}
+
+/* Variante : titre centré entre deux filets. Réservée au bloc qui décrit la
+   façon de travailler, pas le contenu — c'est ce qui justifie qu'il soit le
+   seul titre non aligné à gauche. */
+.titre-filets {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin: 0 0 clamp(1.75rem, 4vw, 2.5rem);
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  text-align: center;
+  white-space: nowrap;
+}
+.titre-filets::before,
+.titre-filets::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--ghost);
+}
+
+
+/* -----------------------------------------------------------------------------
+   6. IMPRESSION
+   -------------------------------------------------------------------------- */
+
+/* Un document doit pouvoir sortir sur papier sans son mobilier. */
+@media print {
+  body { background: #fff; }
+  .cadre,
+  .cadre--cuivre {
+    max-width: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .sans-impression { display: none; }
+}
