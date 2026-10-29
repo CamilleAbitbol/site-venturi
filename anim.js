@@ -85,7 +85,7 @@
   }, { passive: true });
   auDefilement();
 
-  /* 3 bis. Lucioles (grand cercle du hero et VSL) : chaque point a une profondeur z
+  /* 3 bis. Lucioles du grand cercle du hero : chaque point a une profondeur z
             (0 = loin, 1 = près) qui règle sa taille, son flou, sa vitesse et son
             décalage sous le curseur. */
   const lueur = (coeur, halo) => {
