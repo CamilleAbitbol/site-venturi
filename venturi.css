@@ -385,7 +385,6 @@ a { color: inherit; text-decoration: none; }
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
-.defile-titre { margin-bottom: 1.6rem; text-align: center; }
 .defile-piste {
   display: flex;
   gap: 1rem;
