@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Venturi — Votre nouveau site, à portée de main</title>
-  <meta name="description" content="Venturi crée le site de votre activité en 3 jours. Vous le voyez avant de payer. Satisfait ou remboursé.">
+  <title>Venturi — Tout le digital de votre entreprise, sur mesure</title>
+  <meta name="description" content="Site, CRM, intégrations, IA et agents IA : Venturi crée ou remet en ordre l'écosystème digital de votre entreprise, sur mesure. Audit offert.">
   <meta name="robots" content="noindex">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,18 +19,19 @@
     <symbol id="etoile" viewBox="0 0 24 24"><path fill="currentColor" d="M12 0c.6 6.4 5.6 11.4 12 12-6.4.6-11.4 5.6-12 12-.6-6.4-5.6-11.4-12-12C6.4 11.4 11.4 6.4 12 0z"/></symbol>
   </svg>
 
+  <div class="progression" aria-hidden="true"></div>
+
   <!-- NAVIGATION -->
   <header class="nav">
     <div class="conteneur">
       <a href="#" class="marque" aria-label="Venturi"><svg class="marqueSigne" viewBox="0 0 20 13.5" fill="currentColor"><use href="#logo"/></svg>Venturi</a>
       <nav class="nav-liens">
+        <a href="#ecosysteme">Ce qu'on fait</a>
+        <a href="#services">Services</a>
         <a href="#methode">Méthode</a>
-        <a href="#offre">Ce que vous obtenez</a>
-        <a href="#garanties">Garanties</a>
       </nav>
       <div class="nav-actions">
-        <a href="#appel" class="btn btn--contour">Voir un exemple</a>
-        <a href="#appel" class="btn btn--cuivre offset-press">Réserver un appel</a>
+        <a href="#audit" class="btn btn--cuivre offset-press aimant">Audit offert</a>
       </div>
     </div>
   </header>
@@ -39,208 +40,240 @@
 
     <!-- HERO -->
     <section class="hero">
-      <div class="arc" aria-hidden="true"></div>
-      <svg class="etoile" viewBox="0 0 24 24" style="left:14%;top:18%" aria-hidden="true"><use href="#etoile"/></svg>
-      <svg class="etoile etoile--noire" viewBox="0 0 24 24" style="left:22%;top:46%;animation-delay:-1.2s" aria-hidden="true"><use href="#etoile"/></svg>
-      <svg class="etoile" viewBox="0 0 24 24" style="right:15%;top:24%;animation-delay:-2s" aria-hidden="true"><use href="#etoile"/></svg>
-      <svg class="etoile etoile--noire" viewBox="0 0 24 24" style="right:24%;top:52%;animation-delay:-0.6s" aria-hidden="true"><use href="#etoile"/></svg>
+      <div class="trame" aria-hidden="true"></div>
+      <div class="trame-vive" aria-hidden="true"></div>
+      <div class="arc" aria-hidden="true"><svg viewBox="0 0 1000 1000"><circle cx="500" cy="500" r="499" pathLength="3200"/></svg></div>
+      <svg class="etoile" viewBox="0 0 24 24" style="left:13%;top:20%" aria-hidden="true"><use href="#etoile"/></svg>
+      <svg class="etoile etoile--noire" viewBox="0 0 24 24" style="left:21%;top:44%;animation-delay:-1.2s" aria-hidden="true"><use href="#etoile"/></svg>
+      <svg class="etoile" viewBox="0 0 24 24" style="right:14%;top:26%;animation-delay:-2s" aria-hidden="true"><use href="#etoile"/></svg>
+      <svg class="etoile etoile--noire" viewBox="0 0 24 24" style="right:23%;top:50%;animation-delay:-0.6s" aria-hidden="true"><use href="#etoile"/></svg>
 
       <div class="conteneur">
-        <span class="pilule-hero"><b>Nouveau</b> Sites livrés en 3 jours</span>
-        <h1>Votre nouveau site, <em>à portée de main</em></h1>
-        <p class="sous-titre">On crée le site de votre activité, avec la réservation et les bons cadeaux. Vous le voyez en ligne avant de payer quoi que ce soit.</p>
-        <div class="hero-actions">
-          <a href="#appel" class="btn btn--cuivre btn--lg offset-press">Réserver un appel</a>
-          <a href="#offre" class="btn btn--contour btn--lg">Voir le détail</a>
+        <span class="pilule-hero revele" style="--i:2"><b>Offert</b> Un audit de votre digital</span>
+        <h1 data-mots style="--retard:300ms">Tout le digital de votre entreprise, <em>sur mesure.</em></h1>
+        <p class="sous-titre revele" style="--i:8">Site, CRM, outils, intégrations, IA : on crée votre écosystème digital ou on remet de l'ordre dans l'existant. Une meilleure image, une vie plus simple, et moins d'abonnements à payer chaque mois.</p>
+        <div class="hero-actions revele" style="--i:10">
+          <a href="#audit" class="btn btn--cuivre btn--lg offset-press aimant">Demander mon audit offert</a>
+          <a href="#ecosysteme" class="btn btn--contour btn--lg aimant">Ce qu'on peut faire</a>
         </div>
-        <p class="hero-note">À partir de <span class="chiffre">1 900 €</span> · livré sous 3 jours</p>
-        <div class="garanties-ligne">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>Vous voyez le site avant de payer</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>Satisfait ou remboursé</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10V8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l2-1.1"/><path d="M16 19h6M19 16v6"/></svg>Vous êtes propriétaire de tout</span>
-        </div>
+        <p class="hero-note revele" style="--i:11">Sur mesure, selon <b>vos besoins</b> et <b>votre budget</b>.</p>
 
-        <div class="ecran monte">
-          <div class="navigateur">
-            <div class="navigateur-barre"><i></i><i></i><i></i><span class="navigateur-adresse">votre-activite.fr</span></div>
-            <div class="navigateur-page">
-              <div class="navigateur-texte">
-                <small>Rocheservière · Vendée</small>
-                <strong>Offrez-vous une parenthèse de bien-être</strong>
-                <div class="ligne-fantome" style="width:85%"></div>
-                <div class="ligne-fantome" style="width:62%"></div>
-                <div class="navigateur-boutons"><span>Réserver un soin</span><span>Offrir un soin</span></div>
-              </div>
-              <div class="navigateur-photo"><span>★★★★★ <b>5,0</b> · 16 avis Google</span></div>
+        <h2 class="etape-titre revele"><b>Étape 1/2 :</b> regardez la vidéo</h2>
+        <div class="vsl-scene">
+          <div class="vsl" role="region" aria-label="Vidéo de présentation">
+            <div class="vsl-contenu">
+              <button class="lecture" type="button" aria-label="Lire la vidéo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5z"/></svg></button>
+              <span class="vsl-legende">Votre vidéo ici</span>
             </div>
           </div>
         </div>
+        <h2 class="etape-titre revele"><b>Étape 2/2 :</b> réservez votre audit offert</h2>
+        <a href="#audit" class="btn btn--cuivre btn--lg offset-press aimant revele">Je réserve mon audit</a>
       </div>
     </section>
 
-    <!-- DÉFILÉ DES MÉTIERS -->
-    <div class="defile" aria-label="Les métiers pour qui nous créons des sites">
+    <!-- DÉFILÉ -->
+    <div class="defile" aria-label="Ce que nous construisons">
+      <p class="eyebrow defile-titre">Ce qu'on construit pour nos clients</p>
       <div class="defile-piste">
-        <span class="metier">Instituts de beauté</span><span class="metier metier--plein">Massages &amp; bien-être</span><span class="metier">Restaurants</span><span class="metier">Coiffeurs</span><span class="metier metier--plein">Artisans</span><span class="metier">Coachs</span><span class="metier">Gîtes &amp; chambres d'hôtes</span><span class="metier metier--plein">Thérapeutes</span><span class="metier">Photographes</span>
-        <span class="metier" aria-hidden="true">Instituts de beauté</span><span class="metier metier--plein" aria-hidden="true">Massages &amp; bien-être</span><span class="metier" aria-hidden="true">Restaurants</span><span class="metier" aria-hidden="true">Coiffeurs</span><span class="metier metier--plein" aria-hidden="true">Artisans</span><span class="metier" aria-hidden="true">Coachs</span><span class="metier" aria-hidden="true">Gîtes &amp; chambres d'hôtes</span><span class="metier metier--plein" aria-hidden="true">Thérapeutes</span><span class="metier" aria-hidden="true">Photographes</span>
+        <span class="metier">Sites web</span><span class="metier metier--plein">CRM sur mesure</span><span class="metier">Réservation en ligne</span><span class="metier">Paiements</span><span class="metier metier--plein">Agents IA</span><span class="metier">Automatisations</span><span class="metier">Espaces clients</span><span class="metier metier--plein">Intégrations</span><span class="metier">Identité visuelle</span>
+        <span class="metier" aria-hidden="true">Sites web</span><span class="metier metier--plein" aria-hidden="true">CRM sur mesure</span><span class="metier" aria-hidden="true">Réservation en ligne</span><span class="metier" aria-hidden="true">Paiements</span><span class="metier metier--plein" aria-hidden="true">Agents IA</span><span class="metier" aria-hidden="true">Automatisations</span><span class="metier" aria-hidden="true">Espaces clients</span><span class="metier metier--plein" aria-hidden="true">Intégrations</span><span class="metier" aria-hidden="true">Identité visuelle</span>
       </div>
     </div>
 
+    <!-- ÉCOSYSTÈME -->
+    <section class="bloc" id="ecosysteme">
+      <div class="conteneur">
+        <div class="entete">
+          <span class="etiquette revele"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>Ce qu'on fait</span>
+          <h2 data-mots>Un site web, oui. <em>Mais pas que.</em></h2>
+          <p class="revele" style="--i:3">On pense votre digital comme un tout : les outils qui parlent entre eux, une image cohérente, et des coûts mensuels qui baissent au lieu de s'empiler.</p>
+        </div>
+
+        <div class="eco">
+          <div class="orbite revele" aria-hidden="true">
+            <div class="anneau" style="--r:4%"></div>
+            <div class="anneau anneau--plein" style="--r:20%"></div>
+            <div class="bras" style="--r:4%;--t:70s">
+              <div class="noeud" style="--a:0deg"><span class="plein">Site web</span></div>
+              <div class="noeud" style="--a:72deg"><span>CRM</span></div>
+              <div class="noeud" style="--a:144deg"><span class="noir">Agents IA</span></div>
+              <div class="noeud" style="--a:216deg"><span>Réservation</span></div>
+              <div class="noeud" style="--a:288deg"><span>Paiements</span></div>
+            </div>
+            <div class="bras bras--inverse" style="--r:20%;--t:50s">
+              <div class="noeud" style="--a:30deg"><span class="noir">IA</span></div>
+              <div class="noeud" style="--a:150deg"><span>Automatisations</span></div>
+              <div class="noeud" style="--a:270deg"><span class="plein">Visibilité</span></div>
+            </div>
+            <div class="orbite-centre"><svg viewBox="0 0 20 13.5" fill="currentColor"><use href="#logo"/></svg>Votre<br>entreprise</div>
+          </div>
+
+          <div class="piliers">
+            <article class="pilier revele" style="--i:1">
+              <span class="vignette"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span>
+              <div><h3>On crée</h3><p>Vous partez de zéro ? On construit sur mesure le site, la plateforme et les outils dont votre activité a besoin.</p></div>
+            </article>
+            <article class="pilier revele" style="--i:2">
+              <span class="vignette"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/><rect x="8" y="8" width="8" height="8" rx="1.5"/></svg></span>
+              <div><h3>On regroupe</h3><p>Dix abonnements à droite à gauche ? On les remplace par une seule plateforme à vous, souvent pour moins cher.</p></div>
+            </article>
+            <article class="pilier revele" style="--i:3">
+              <span class="vignette"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span>
+              <div><h3>On optimise</h3><p>Vous avez déjà des outils ? On les améliore, on les connecte entre eux et on modernise votre image.</p></div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="bloc" id="services" style="padding-top:0">
+      <div class="conteneur">
+        <div class="entete">
+          <span class="etiquette revele"><svg viewBox="0 0 24 24"><use href="#etoile"/></svg>Services</span>
+          <h2 data-mots>On peut faire <em>(presque) tout.</em></h2>
+          <p class="revele" style="--i:3">Et surtout ce dont vous avez réellement besoin. Voici ce qu'on construit le plus souvent.</p>
+        </div>
+
+        <div class="bento">
+          <article class="tuile tuile--large faisceau incline revele" style="--i:0">
+            <div class="mini-fenetres" aria-hidden="true"><i></i><i></i><i></i></div>
+            <h3>Sites &amp; plateformes</h3>
+            <p>Site vitrine, réservation, boutique, espace client : rapide, beau, pensé d'abord pour le téléphone.</p>
+          </article>
+          <article class="tuile tuile--large tuile--noire incline revele" style="--i:1">
+            <div class="mini-ia" aria-hidden="true"><span>Répond aux clients</span><span>Planifie</span><span>Relance</span></div>
+            <h3>IA &amp; agents IA</h3>
+            <p>Des assistants qui répondent, trient, planifient et relancent à votre place. Pour les structures qui veulent déléguer.</p>
+          </article>
+          <article class="tuile incline revele" style="--i:0">
+            <div class="mini-crm" aria-hidden="true"><div>Mme Laurent <em>Nouveau</em></div><div>Atelier Morel <em>Devis</em></div><div>Hôtel des Pins <em>Client</em></div></div>
+            <h3>CRM sur mesure</h3>
+            <p>Vos contacts, devis et clients au même endroit, organisés comme vous travaillez.</p>
+          </article>
+          <article class="tuile tuile--noire incline revele" style="--i:1">
+            <div class="mini-flux" aria-hidden="true"><span>AGENDA</span><b></b><span>CRM</span><b></b><span>FACT.</span></div>
+            <h3>Intégrations</h3>
+            <p>Vos outils se parlent enfin : plus de copier-coller, plus de doubles saisies.</p>
+          </article>
+          <article class="tuile incline revele" style="--i:2">
+            <div class="mini-marque" aria-hidden="true"><i></i><i></i><i></i><strong>Aa</strong></div>
+            <h3>Image de marque</h3>
+            <p>On crée ou on rafraîchit votre identité pour qu'elle inspire confiance au premier regard.</p>
+          </article>
+          <article class="tuile tuile--large incline revele" style="--i:0">
+            <div class="mini-courbe" aria-hidden="true"><svg viewBox="0 0 300 90" preserveAspectRatio="none"><line x1="0" y1="89" x2="300" y2="89"/><path d="M0 80 C 40 78, 60 70, 90 62 S 150 58, 180 40 S 250 22, 300 6"/></svg></div>
+            <h3>Automatisations</h3>
+            <p>Relances, confirmations, factures, rappels : ce qui se répète tourne tout seul.</p>
+          </article>
+          <article class="tuile tuile--large incline revele" style="--i:1">
+            <span class="tuile-badge">Nouveau</span>
+            <div class="mini-courbe" aria-hidden="true"><svg viewBox="0 0 300 90" preserveAspectRatio="none"><line x1="0" y1="89" x2="300" y2="89"/><path d="M0 85 L 50 78 L 100 70 L 150 64 L 200 44 L 250 30 L 300 12"/></svg></div>
+            <h3>Visibilité &amp; prospects</h3>
+            <p>Être trouvé, et transformer les visites en demandes. Un accompagnement qu'on développe en ce moment avec nos premiers clients.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EN DÉTAIL -->
+    <section class="bloc" style="padding-top:0">
+      <div class="conteneur">
+
+        <div class="rangee">
+          <div class="fusion revele" aria-label="Vos abonnements regroupés en une seule plateforme">
+            <span class="abo" style="--x:-0.3;--y:-0.3;--i:0">Site vitrine</span>
+            <span class="abo" style="--x:-0.04;--y:-0.36;--i:1">Prise de rendez-vous</span>
+            <span class="abo" style="--x:0.28;--y:-0.24;--i:2">Emailing</span>
+            <span class="abo" style="--x:-0.32;--y:0;--i:3">Facturation</span>
+            <span class="abo" style="--x:0.3;--y:0.04;--i:4">Formulaires</span>
+            <span class="abo" style="--x:-0.22;--y:0.3;--i:5">Fichier clients</span>
+            <span class="abo" style="--x:0.04;--y:0.36;--i:6">Bons cadeaux</span>
+            <span class="abo" style="--x:0.27;--y:0.25;--i:7">Paiement</span>
+            <div class="plateforme">
+              <span class="marque"><svg class="marqueSigne" viewBox="0 0 20 13.5" fill="currentColor"><use href="#logo"/></svg>Venturi</span>
+              <strong>Votre plateforme</strong>
+              <small>Un seul outil · un seul coût</small>
+            </div>
+            <button class="rejouer" type="button">↻ Rejouer</button>
+          </div>
+          <div class="rangee-texte">
+            <span class="eyebrow revele">Regrouper</span>
+            <h3 data-mots>Moins d'abonnements, <em>plus de clarté.</em></h3>
+            <p class="revele" style="--i:2">Beaucoup d'entrepreneurs paient chaque mois un outil pour le site, un pour les rendez-vous, un pour les factures, un pour les mails… On réunit tout dans une plateforme qui vous appartient.</p>
+            <ul class="coches revele" style="--i:3"><li>Un seul endroit pour tout gérer</li><li>Des coûts mensuels qui baissent</li><li>Construite autour de votre façon de travailler</li></ul>
+          </div>
+        </div>
+
+        <div class="rangee rangee--inverse">
+          <div class="maquette incline revele">
+            <div class="fil" aria-live="off">
+              <div class="bulle bulle--client">Bonjour, vous avez un créneau jeudi pour un devis ?</div>
+              <div class="bulle bulle--agent">Bonjour ! Oui, jeudi à 14 h ou à 16 h 30. Lequel vous convient le mieux ?</div>
+              <div class="bulle bulle--client">16 h 30 parfait.</div>
+              <div class="bulle bulle--agent">C'est noté pour jeudi 16 h 30. Vous recevez la confirmation par mail.</div>
+              <div class="bulle bulle--action">✓ Rendez-vous ajouté à l'agenda · fiche client créée</div>
+            </div>
+            <div class="champ"><span>Écrire un message…</span><span>↑</span></div>
+          </div>
+          <div class="rangee-texte">
+            <span class="eyebrow revele">Intelligence artificielle</span>
+            <h3 data-mots>Un agent IA qui travaille <em>pendant que vous dormez.</em></h3>
+            <p class="revele" style="--i:2">Il répond à vos clients, prend les rendez-vous, met à jour votre CRM et relance au bon moment. Pour les structures qui veulent déléguer sans recruter.</p>
+            <ul class="coches revele" style="--i:3"><li>Branché sur vos outils existants</li><li>Formé sur votre activité</li><li>Vous gardez la main à tout moment</li></ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- MÉTHODE -->
-    <section class="bloc" id="methode">
+    <section class="bloc" id="methode" style="padding-top:0">
       <div class="conteneur">
-        <div class="entete monte">
-          <span class="etiquette"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>Comment ça marche</span>
-          <h2>Un site neuf, <em>sans risque</em></h2>
-          <p>Pas de maquette à imaginer, pas d'acompte perdu. Vous jugez sur pièce, en ligne, avant de vous engager.</p>
+        <div class="entete">
+          <span class="etiquette revele"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 12h16M14 6l6 6-6 6"/></svg>Méthode</span>
+          <h2 data-mots>Du sur mesure, <em>sans prise de tête.</em></h2>
         </div>
-        <div class="etapes">
-          <article class="etape monte">
-            <span class="numero">01</span>
-            <span class="vignette"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></span>
-            <h3>On s'appelle</h3>
-            <p>Vingt minutes pour comprendre votre activité, vos clients et ce que votre site doit leur faire faire.</p>
+        <div class="methode">
+          <div class="methode-ligne" aria-hidden="true"><i></i></div>
+          <article class="pas revele" style="--i:0">
+            <span class="pas-num">01</span>
+            <h3>L'audit</h3>
+            <p>On regarde ce que vous avez, ce que vous payez et ce qui vous fait perdre du temps.</p>
+            <span class="offert">Offert</span>
           </article>
-          <article class="etape monte" style="transition-delay:.08s">
-            <span class="numero">02</span>
-            <span class="vignette"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3"/></svg></span>
-            <h3>Vous voyez le site</h3>
-            <p>En trois jours, votre site tourne en ligne avec vos textes et vos photos. Vous le testez sur votre téléphone.</p>
+          <article class="pas revele" style="--i:1">
+            <span class="pas-num">02</span>
+            <h3>La proposition</h3>
+            <p>Un plan clair, adapté à vos besoins et à votre budget. Vous choisissez ce que vous lancez.</p>
           </article>
-          <article class="etape monte" style="transition-delay:.16s">
-            <span class="numero">03</span>
-            <span class="vignette"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
-            <h3>Vous signez</h3>
-            <p>Seulement s'il vous plaît. Le domaine et le code passent à votre nom, et vous avez 30 jours de retouches.</p>
+          <article class="pas revele" style="--i:2">
+            <span class="pas-num">03</span>
+            <h3>La construction</h3>
+            <p>On construit, vous suivez l'avancement et vous testez avant la mise en ligne.</p>
+          </article>
+          <article class="pas revele" style="--i:3">
+            <span class="pas-num">04</span>
+            <h3>L'accompagnement</h3>
+            <p>On reste là pour faire évoluer vos outils au rythme de votre entreprise.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- OFFRE -->
-    <section class="bloc bloc--trait" id="offre">
+    <!-- AUDIT OFFERT -->
+    <section class="bloc" id="audit" style="padding-top:0">
       <div class="conteneur">
-        <div class="entete monte">
-          <span class="etiquette"><svg viewBox="0 0 24 24" fill="currentColor"><use href="#etoile"/></svg>Ce que vous obtenez</span>
-          <h2>Tout ce qu'il faut, <em>rien de plus</em></h2>
-          <p>Quatre briques, chacune avec son prix. Vous prenez celles dont votre activité a besoin.</p>
-        </div>
-
-        <div class="rangee monte">
-          <div class="maquette">
-            <div class="panneau">
-              <div class="panneau-titre">votre-activite.fr · pages</div>
-              <div class="panneau-ligne">Accueil <span class="pastille-nuit">En ligne</span></div>
-              <div class="panneau-ligne">Soins &amp; tarifs <span class="pastille-nuit">En ligne</span></div>
-              <div class="panneau-ligne">À propos <span class="pastille-nuit">En ligne</span></div>
-              <div class="panneau-ligne">Avis &amp; contact <span class="pastille-nuit">En ligne</span></div>
-            </div>
-            <div class="champ"><span>Créé avec Wix.com</span><span>Supprimé</span></div>
-          </div>
-          <div class="rangee-texte">
-            <span class="eyebrow">Poste 1 · Votre site</span>
-            <h3>Le site entier, <em>refait</em></h3>
-            <p>Toutes vos pages, avec vos textes et vos photos, lisibles aussi bien sur téléphone que sur ordinateur.</p>
-            <ul class="coches"><li>Une seule adresse, partout</li><li>Plus de « Créé avec Wix.com »</li><li>Pensé d'abord pour le téléphone</li></ul>
-            <div class="prix-poste"><span class="chiffre">1 000 €</span></div>
-          </div>
-        </div>
-
-        <div class="rangee rangee--inverse monte">
-          <div class="maquette">
-            <div class="panneau">
-              <div class="panneau-titre">Massage relaxant · 1 h</div>
-              <div class="panneau-ligne">Jeudi 6 novembre <b>65 €</b></div>
-              <div class="creneaux"><span>9:00</span><span>10:30</span><span class="pris">14:00</span><span>15:30</span><span>16:00</span><span>17:30</span><span>18:00</span><span>19:00</span></div>
-            </div>
-            <div class="champ"><span>Paiement par carte</span><span>Réserver</span></div>
-          </div>
-          <div class="rangee-texte">
-            <span class="eyebrow">Poste 2 · Réservation</span>
-            <h3>La réservation <em>chez vous</em></h3>
-            <p>Vos clients choisissent leur soin et leur créneau, paient en ligne, et le rendez-vous arrive dans votre agenda.</p>
-            <ul class="coches"><li>Choix du soin et du créneau</li><li>Règlement en ligne</li><li>Plus de détour par une plateforme</li></ul>
-            <div class="prix-poste"><span class="chiffre">400 €</span></div>
-          </div>
-        </div>
-
-        <div class="rangee monte">
-          <div class="maquette">
-            <div class="carte-cadeau">
-              <small>Bon cadeau · Venturi</small>
-              <strong>80 €</strong>
-              <p>Valable un an sur tous les soins</p>
-            </div>
-            <div class="champ"><span>Envoyé en PDF à camille@…</span><span>Envoyé</span></div>
-          </div>
-          <div class="rangee-texte">
-            <span class="eyebrow">Poste 3 · Bons cadeaux</span>
-            <h3>Les bons cadeaux, <em>vendus seuls</em></h3>
-            <p>Un soin précis ou un montant libre de 20 à 500 €, payé par carte et envoyé en PDF dans la minute.</p>
-            <ul class="coches"><li>Paiement par carte</li><li>PDF envoyé tout de suite</li><li>Montant libre ou soin choisi</li></ul>
-            <div class="prix-poste"><span class="chiffre">300 €</span></div>
-          </div>
-        </div>
-
-        <div class="rangee rangee--inverse monte">
-          <div class="maquette">
-            <div class="stats">
-              <div class="panneau"><div class="panneau-titre">Rendez-vous</div><b>24</b></div>
-              <div class="panneau"><div class="panneau-titre">Bons vendus</div><b>9</b></div>
-            </div>
-            <div class="panneau" style="margin-top:.75rem">
-              <div class="panneau-titre">Cette semaine</div>
-              <div class="barres"><i style="height:35%"></i><i style="height:55%"></i><i style="height:42%"></i><i style="height:70%"></i><i style="height:60%"></i><i style="height:92%"></i></div>
-            </div>
-          </div>
-          <div class="rangee-texte">
-            <span class="eyebrow">Poste 4 · Votre espace</span>
-            <h3>Tout suivre, <em>d'un coup d'œil</em></h3>
-            <p>Vos rendez-vous et vos bons cadeaux réunis au même endroit, sur ordinateur comme sur téléphone.</p>
-            <ul class="coches"><li>Vos rendez-vous</li><li>Vos bons cadeaux</li><li>Sur ordinateur et téléphone</li></ul>
-            <div class="prix-poste"><span class="chiffre">200 €</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- GARANTIES -->
-    <section class="bloc bloc--trait" id="garanties">
-      <div class="conteneur">
-        <div class="entete monte">
-          <span class="etiquette"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Livré avec votre projet</span>
-          <h2>Vous ne prenez <em>aucun risque</em></h2>
-        </div>
-        <div class="garanties">
-          <article class="garantie monte">
-            <span class="vignette"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></span>
-            <div><h3>Satisfait ou remboursé</h3><p>Si le travail ne vous convient pas, on vous rend ce que vous avez versé.</p></div>
-          </article>
-          <article class="garantie monte" style="transition-delay:.08s">
-            <span class="vignette"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
-            <div><h3>30 jours de retouches</h3><p>Retouches illimitées tant qu'elles portent sur ce qui est décrit au contrat.</p></div>
-          </article>
-          <article class="garantie monte">
-            <span class="vignette"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.6 7.6a5.5 5.5 0 1 1-7.8 7.8 5.5 5.5 0 0 1 7.8-7.8zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></span>
-            <div><h3>Vous êtes propriétaire de tout</h3><p>Le site, le nom de domaine et le code sont à votre nom. Vous les confiez à qui vous voulez.</p></div>
-          </article>
-          <article class="garantie monte" style="transition-delay:.08s">
-            <span class="vignette"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9.5a3 3 0 0 0-3-1.5c-1.7 0-3 1-3 2.3s1 1.9 3 2.2 3 1 3 2.3-1.3 2.2-3 2.2a3.2 3.2 0 0 1-3-1.5M12 6.5v11"/></svg></span>
-            <div><h3>Aucune TVA à ajouter</h3><p>Vous payez exactement le montant affiché, sans supplément.</p></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- APPEL -->
-    <section class="bloc" id="appel" style="padding-top:0">
-      <div class="conteneur">
-        <div class="appel monte">
-          <h2>On y <em>va</em> ?</h2>
-          <p>Vingt minutes au téléphone suffisent pour savoir si on peut vous aider. Sans engagement.</p>
+        <div class="appel revele">
+          <div class="appel-points" aria-hidden="true"></div>
+          <div class="appel-arc" aria-hidden="true"></div>
+          <span class="etiquette">Audit offert</span>
+          <h2 data-mots>On regarde votre digital <em>ensemble ?</em></h2>
+          <p>Trente minutes pour faire le point sur vos outils, votre image et vos coûts. Vous repartez avec des pistes concrètes, que vous travailliez avec nous ou non.</p>
           <div class="hero-actions">
-            <a href="#" class="btn btn--cuivre btn--lg offset-press">Réserver un appel</a>
-            <a href="#offre" class="btn btn--blanc btn--lg">Revoir l'offre</a>
+            <a href="#" class="btn btn--cuivre btn--lg offset-press aimant">Réserver mon audit offert</a>
+            <a href="#ecosysteme" class="btn btn--blanc btn--lg aimant">Revoir ce qu'on fait</a>
           </div>
         </div>
       </div>
@@ -251,16 +284,11 @@
   <footer class="pied">
     <div class="conteneur">
       <span class="marque"><svg class="marqueSigne" viewBox="0 0 20 13.5" fill="currentColor"><use href="#logo"/></svg>Venturi</span>
-      <nav><a href="#methode">Méthode</a><a href="#offre">Offre</a><a href="#garanties">Garanties</a></nav>
+      <nav><a href="#ecosysteme">Ce qu'on fait</a><a href="#services">Services</a><a href="#methode">Méthode</a><a href="#audit">Audit offert</a></nav>
       <span>© 2026 Venturi OÜ</span>
     </div>
   </footer>
 
-  <script>
-    const io = new IntersectionObserver((entrees) => {
-      entrees.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('vu'); io.unobserve(e.target); } });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.monte').forEach((el) => io.observe(el));
-  </script>
+  <script src="anim.js"></script>
 </body>
 </html>
