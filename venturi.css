@@ -16,33 +16,40 @@
 :root {
   --copper: #890725;
   --copper-dark: #6d071a;
-  --ink: #111111;
-  --ink-soft: #444444;
-  --ink-faint: #8a8a8a;
-  --surface: #ffffff;
-  --cream: #ffffff;
-  --sand: #ffffff;
-  --desk: #ffffff;
-  --line: #e6e6e6;
-  --ghost: #cfcfcf;
-  --nuit: #0b0b0b;
+  /* FOND NOIR (Ryann, 29.10.2026) : écriture blanche, le bordeaux reste.
+     --ink est la couleur du TEXTE et des traits : elle est donc blanche ici.
+     --noir est le noir des fonds pleins, à utiliser pour un texte posé sur
+     un aplat blanc. */
+  --ink: #f4f4f4;
+  --ink-soft: #b5b5b5;
+  --ink-faint: #7c7c7c;
+  --noir: #070707;
+  --surface: #070707;
+  --cream: #070707;
+  --sand: #070707;
+  --desk: #070707;
+  --carte: #111111;
+  --line: #262626;
+  --ghost: #3c3c3c;
+  --nuit: #101010;
 
   --filet-cuivre: var(--ink);
   --relief-cuivre: 5px 5px 0 0 var(--ink), var(--relief);
   --relief-cuivre-cadre: 6px 6px 0 0 var(--ink), var(--relief-cadre);
   --relief-cuivre-plein: 5px 5px 0 0 var(--copper), var(--relief);
-  --relief: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 32px rgba(0, 0, 0, 0.07);
-  --relief-cadre: 0 1px 2px rgba(0, 0, 0, 0.05), 0 26px 64px rgba(0, 0, 0, 0.1);
+  --relief: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.5);
+  --relief-cadre: 0 1px 2px rgba(0, 0, 0, 0.4), 0 26px 64px rgba(0, 0, 0, 0.6);
 
   --ressort: cubic-bezier(0.16, 1, 0.3, 1);
   --largeur: 72rem;
 }
 
-body { background: #fff; overflow-x: clip; }
+body { background: var(--surface); color: var(--ink); overflow-x: clip; }
+.btn--cuivre { color: #fff; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: var(--copper); color: #fff; }
 
-.vignette { background: var(--ink); color: #fff; }
+.vignette { background: var(--ink); color: var(--noir); }
 
 .conteneur {
   width: min(var(--largeur), 100% - 2 * clamp(1rem, 4vw, 2.5rem));
@@ -115,7 +122,7 @@ a { color: inherit; text-decoration: none; }
 .nav.colle .conteneur {
   width: min(62rem, 100% - 1.5rem);
   /* Blanc PLEIN : un verre dépoli sur un bouton bordeaux donne du rose */
-  background: #fff;
+  background: var(--carte);
   border-color: var(--line);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
@@ -129,7 +136,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink-soft);
   transition: color var(--duree) ease, background var(--duree) ease;
 }
-.nav-liens a:hover { color: var(--ink); background: #f2f2f2; }
+.nav-liens a:hover { color: var(--ink); background: #1c1c1c; }
 .marqueSigne { color: var(--copper); }
 
 .progression {
@@ -160,7 +167,7 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   inset: 0;
   z-index: -3;
-  background-image: radial-gradient(#d2d2d2 1px, transparent 1.3px);
+  background-image: radial-gradient(#2c2c2c 1px, transparent 1.3px);
   background-size: 22px 22px;
   -webkit-mask-image: radial-gradient(ellipse 80% 55% at 50% 0%, #000 30%, transparent 78%);
   mask-image: radial-gradient(ellipse 80% 55% at 50% 0%, #000 30%, transparent 78%);
@@ -185,7 +192,7 @@ a { color: inherit; text-decoration: none; }
 }
 .arc svg { width: 100%; height: 100%; overflow: visible; }
 .arc circle {
-  fill: #fff;
+  fill: var(--surface);
   stroke: var(--copper);
   stroke-width: 1.5;
   stroke-dasharray: 3200;
@@ -198,7 +205,7 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  box-shadow: 0 -30px 60px -30px rgba(0, 0, 0, 0.22);
+  box-shadow: 0 -40px 90px -30px rgba(137, 7, 37, 0.75);
 }
 
 .etoile {
@@ -222,7 +229,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0.4rem 1rem 0.4rem 0.45rem;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: #fff;
+  background: var(--carte);
   box-shadow: var(--relief);
   font-family: var(--display);
   font-size: 0.8125rem;
@@ -345,7 +352,7 @@ a { color: inherit; text-decoration: none; }
   aspect-ratio: 1;
   border: 0;
   border-radius: 50%;
-  background: #fff;
+  background: #FFFFFF;
   color: var(--copper);
   cursor: pointer;
   transition: transform 0.4s var(--ressort);
@@ -399,7 +406,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0.8rem 1.35rem;
   border: 1.5px solid var(--ink);
   border-radius: var(--rayon);
-  background: #fff;
+  background: var(--carte);
   font-family: var(--display);
   font-size: 1rem;
   font-weight: 700;
@@ -407,7 +414,7 @@ a { color: inherit; text-decoration: none; }
   transition: background var(--duree) ease, color var(--duree) ease;
 }
 .metier::before { content: "✦"; color: var(--copper); }
-.metier--plein, .metier:hover { background: var(--ink); color: #fff; }
+.metier--plein, .metier:hover { background: var(--ink); color: var(--noir); }
 
 
 /* ---------------------------------------------------------------------------
@@ -443,7 +450,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0.4rem 0.9rem;
   border: 1.5px solid var(--ink);
   border-radius: 999px;
-  background: #fff;
+  background: var(--carte);
   font-family: var(--display);
   font-size: 0.6875rem;
   font-weight: 700;
@@ -492,7 +499,7 @@ a { color: inherit; text-decoration: none; }
   font-weight: 800;
   font-size: clamp(0.75rem, 1.5vw, 0.95rem);
   line-height: 1.1;
-  box-shadow: 0 0 0 10px #fff, 0 0 0 11.5px var(--ink), 0 30px 60px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 0 10px var(--surface), 0 0 0 11.5px var(--ink), 0 0 80px rgba(137, 7, 37, 0.55);
   isolation: isolate;
   overflow: hidden;
 }
@@ -529,7 +536,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0.45rem 0.8rem;
   border: 1.5px solid var(--ink);
   border-radius: 12px;
-  background: #fff;
+  background: var(--carte);
   box-shadow: 3px 3px 0 0 var(--ink);
   font-family: var(--display);
   font-size: clamp(0.68rem, 1.25vw, 0.8125rem);
@@ -542,7 +549,7 @@ a { color: inherit; text-decoration: none; }
 }
 .bras--inverse .noeud > span { animation-direction: reverse; }
 .noeud > span.plein { background: var(--copper); border-color: var(--copper); color: #fff; }
-.noeud > span.noir { background: var(--ink); color: #fff; box-shadow: 3px 3px 0 0 var(--copper); }
+.noeud > span.noir { background: var(--ink); color: var(--noir); box-shadow: 3px 3px 0 0 var(--copper); }
 @keyframes tourne { to { rotate: 360deg; } }
 @keyframes contre { from { rotate: 0deg; } to { rotate: -360deg; } }
 
@@ -554,7 +561,7 @@ a { color: inherit; text-decoration: none; }
   padding: 1.35rem 1.4rem;
   border: 1px solid var(--line);
   border-radius: var(--rayon-lg);
-  background: #fff;
+  background: var(--carte);
   box-shadow: var(--relief);
   transition: transform 0.5s var(--ressort), box-shadow 0.5s var(--ressort), border-color 0.3s ease;
 }
@@ -581,7 +588,7 @@ a { color: inherit; text-decoration: none; }
   padding: clamp(1.4rem, 2.6vw, 1.9rem);
   border: 1px solid var(--line);
   border-radius: var(--rayon-cadre);
-  background: #fff;
+  background: var(--carte);
   box-shadow: var(--relief);
   overflow: hidden;
   isolation: isolate;
@@ -590,7 +597,7 @@ a { color: inherit; text-decoration: none; }
   transition: transform 0.5s var(--ressort), box-shadow 0.5s var(--ressort), border-color 0.3s ease;
 }
 .tuile--large { grid-column: span 3; }
-.tuile--noire { background: var(--nuit); color: #fff; border-color: #222; }
+.tuile--noire { background: var(--nuit); color: #fff; border-color: var(--line); }
 .tuile--noire p { color: #b5b5b5 !important; }
 .tuile--noire::before {
   content: "";
@@ -654,10 +661,10 @@ a { color: inherit; text-decoration: none; }
   border-radius: 10px;
   background:
     linear-gradient(var(--ink) 0 0) 0.6rem 0.65rem / 45% 5px no-repeat,
-    linear-gradient(#e2e2e2 0 0) 0.6rem 1.25rem / 65% 4px no-repeat,
-    linear-gradient(#e2e2e2 0 0) 0.6rem 1.75rem / 50% 4px no-repeat,
+    linear-gradient(#3a3a3a 0 0) 0.6rem 1.25rem / 65% 4px no-repeat,
+    linear-gradient(#3a3a3a 0 0) 0.6rem 1.75rem / 50% 4px no-repeat,
     linear-gradient(var(--copper) 0 0) 0.6rem 2.8rem / 34% 0.95rem no-repeat,
-    #fff;
+    var(--carte);
   box-shadow: 3px 3px 0 0 var(--ink);
   animation: flotte 4s ease-in-out infinite;
 }
@@ -685,7 +692,7 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   inset: 0;
   width: 35%;
-  background: #fff;
+  background: var(--carte);
   animation: flux 1.8s linear infinite;
 }
 .mini-flux b:nth-of-type(2)::after { animation-delay: 0.9s; }
@@ -699,14 +706,14 @@ a { color: inherit; text-decoration: none; }
   padding: 0.5rem 0.75rem;
   border: 1px solid var(--line);
   border-radius: 10px;
-  background: #fff;
+  background: var(--carte);
   font-size: 0.8rem;
   font-weight: 600;
   animation: crm 6s var(--ressort) infinite;
 }
 .mini-crm div:nth-child(2) { animation-delay: -2s; }
 .mini-crm div:nth-child(3) { animation-delay: -4s; }
-.mini-crm em { font-style: normal; padding: 0.15rem 0.5rem; border-radius: 999px; background: var(--ink); color: #fff; font-size: 0.65rem; }
+.mini-crm em { font-style: normal; padding: 0.15rem 0.5rem; border-radius: 999px; background: var(--ink); color: var(--noir); font-size: 0.65rem; }
 .mini-crm div:nth-child(1) em { background: var(--copper); }
 @keyframes crm { 0%, 70%, 100% { transform: none; border-color: var(--line); } 80% { transform: translateX(10px); border-color: var(--ink); } }
 
@@ -725,7 +732,7 @@ a { color: inherit; text-decoration: none; }
 }
 .mini-marque i:nth-child(1) { background: var(--copper); }
 .mini-marque i:nth-child(2) { background: var(--ink); animation-delay: -1s; }
-.mini-marque i:nth-child(3) { background: #fff; animation-delay: -2s; }
+.mini-marque i:nth-child(3) { background: #FFFFFF; animation-delay: -2s; }
 .mini-marque strong { margin-left: 0.3rem; font-family: Georgia, serif; font-size: 1.7rem; font-style: italic; font-weight: 400; }
 @keyframes pastilles { 50% { transform: translateY(-6px) rotate(10deg); } }
 
@@ -798,8 +805,8 @@ a { color: inherit; text-decoration: none; }
   justify-items: center;
   padding: 1.4rem 2.2rem;
   border-radius: 18px;
-  background: #fff;
-  color: var(--ink);
+  background: #FFFFFF;
+  color: var(--noir);
   text-align: center;
   box-shadow: 6px 6px 0 0 var(--copper), 0 30px 60px rgba(0, 0, 0, 0.5);
   opacity: 0;
@@ -898,7 +905,7 @@ a { color: inherit; text-decoration: none; }
   transition: opacity 0.5s var(--ressort), transform 0.5s var(--ressort);
 }
 .bulle.montre { opacity: 1; transform: none; }
-.bulle--client { justify-self: end; background: #fff; color: var(--ink); border-bottom-right-radius: 4px; }
+.bulle--client { justify-self: end; background: #FFFFFF; color: var(--noir); border-bottom-right-radius: 4px; }
 .bulle--agent { justify-self: start; background: #1c1c1c; border: 1px solid #2c2c2c; border-bottom-left-radius: 4px; }
 .bulle--action {
   justify-self: start;
@@ -927,8 +934,8 @@ a { color: inherit; text-decoration: none; }
   width: 2rem;
   height: 2rem;
   border-radius: 9px;
-  background: #fff;
-  color: var(--ink);
+  background: #FFFFFF;
+  color: var(--noir);
   font-weight: 800;
 }
 
@@ -967,7 +974,7 @@ a { color: inherit; text-decoration: none; }
   height: 3.2rem;
   border: 1.5px solid var(--ink);
   border-radius: 50%;
-  background: #fff;
+  background: var(--carte);
   font-family: var(--chiffres);
   font-size: 1.1rem;
   font-weight: 900;
@@ -982,7 +989,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0.25rem 0.6rem;
   border-radius: 999px;
   background: var(--ink);
-  color: #fff;
+  color: var(--noir);
   font-family: var(--display);
   font-size: 0.625rem;
   font-weight: 700;
@@ -1037,7 +1044,7 @@ a { color: inherit; text-decoration: none; }
 .appel h2 em { font-style: italic; color: #fff; text-decoration: underline; text-decoration-color: var(--copper); text-decoration-thickness: 0.08em; text-underline-offset: 0.12em; }
 .appel p { max-width: 34rem; margin: 1.2rem auto 0; color: #bdbdbd; }
 .btn--blanc { border: 1.5px solid #fff; background: transparent; color: #fff; }
-.btn--blanc:hover { background: #fff; color: var(--ink); }
+.btn--blanc:hover { background: #FFFFFF; color: var(--noir); }
 .appel .btn--cuivre { box-shadow: var(--offset-button) var(--offset-button) 0 0 #fff; }
 .appel .btn--cuivre:hover { box-shadow: 2px 2px 0 0 #fff; }
 
@@ -1133,7 +1140,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0.4rem 0.8rem;
   border: 1.5px solid var(--ink);
   border-radius: 12px;
-  background: #fff;
+  background: var(--carte);
   box-shadow: 3px 3px 0 0 var(--ink);
   font-family: var(--display);
   font-size: 0.8125rem;
@@ -1144,7 +1151,7 @@ a { color: inherit; text-decoration: none; }
 .bulle-tag--a { left: -1.5rem; top: 12%; rotate: -4deg; }
 .bulle-tag--b { right: -1.75rem; bottom: 10%; rotate: 3deg; animation-delay: -2s; }
 .bulle-tag.plein { background: var(--copper); border-color: var(--copper); color: #fff; }
-.bulle-tag.noir { background: var(--ink); color: #fff; box-shadow: 3px 3px 0 0 var(--copper); }
+.bulle-tag.noir { background: var(--ink); color: var(--noir); box-shadow: 3px 3px 0 0 var(--copper); }
 .membre h3 { font-size: 1.6rem; letter-spacing: -0.03em; }
 .membre-role {
   display: inline-block;
@@ -1162,3 +1169,13 @@ a { color: inherit; text-decoration: none; }
   .equipe { grid-template-columns: 1fr; }
   .bulle-photo { width: min(70%, 15rem); }
 }
+
+
+/* ---------------------------------------------------------------------------
+   FOND NOIR — les blocs « maquette » se détachent du fond par un filet
+   ------------------------------------------------------------------------ */
+
+.vsl, .maquette, .fusion, .appel { border: 1px solid var(--line); }
+.nav.colle .conteneur { background: var(--carte); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); }
+.mini-crm div:nth-child(1) em { color: #fff; }
+.mini-marque i:nth-child(2) { background: var(--noir); }
