@@ -200,8 +200,8 @@ a { color: inherit; text-decoration: none; }
   animation: arc-trace 2.6s var(--ressort) 0.6s forwards;
 }
 @keyframes arc-trace { to { stroke-dashoffset: 0; } }
-/* Lucioles proches et lointaines dans le cercle : dessinées par anim.js */
-.arc .lucioles {
+/* Étoiles qui viennent du fond dans le cercle : dessinées par anim.js */
+.arc .espace {
   position: absolute;
   inset: 0;
   z-index: 1;

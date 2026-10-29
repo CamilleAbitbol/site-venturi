@@ -85,129 +85,89 @@
   }, { passive: true });
   auDefilement();
 
-  /* 3 bis. Lucioles du grand cercle du hero : chaque point a une profondeur z
-            (0 = loin, 1 = près) qui règle sa taille, son flou, sa vitesse et son
-            décalage sous le curseur. */
-  const lueur = (coeur, halo) => {
-    const s = document.createElement('canvas');
-    s.width = s.height = 128;
-    const c = s.getContext('2d');
-    const g = c.createRadialGradient(64, 64, 0, 64, 64, 64);
-    g.addColorStop(0, `rgba(255,255,255,${coeur})`);
-    g.addColorStop(0.18, `rgba(255,236,214,${halo})`);
-    g.addColorStop(1, 'rgba(255,236,214,0)');
-    c.fillStyle = g;
-    c.fillRect(0, 0, 128, 128);
-    return s;
-  };
-  const nette = lueur(1, 0.7);
-  const floue = lueur(0.5, 0.3);
-  let vise = { x: 0, y: 0 };
-  if (!calme) addEventListener('pointermove', (e) => {
-    vise = { x: e.clientX / innerWidth - 0.5, y: e.clientY / innerHeight - 0.5 };
-  }, { passive: true });
-
-  document.querySelectorAll('.lucioles').forEach((toile) => {
+  /* 3 bis. Espace dans le grand cercle du hero : les étoiles viennent du fond, depuis
+            derrière la VSL, et grossissent en filant tout doucement vers l'écran.
+            Le curseur décale un peu le point de fuite. */
+  const toile = document.querySelector('.espace');
+  if (toile) {
     const ctx = toile.getContext('2d');
     const boite = toile.parentElement;
-    const densite = +toile.dataset.densite || 4200;
-    let L = 0, H = 0, points = [];
-    const regard = { x: 0, y: 0 };
+    const halo = document.createElement('canvas');
+    halo.width = halo.height = 128;
+    {
+      const c = halo.getContext('2d');
+      const g = c.createRadialGradient(64, 64, 0, 64, 64, 64);
+      g.addColorStop(0, 'rgba(255,255,255,0.5)');
+      g.addColorStop(0.18, 'rgba(255,236,214,0.3)');
+      g.addColorStop(1, 'rgba(255,236,214,0)');
+      c.fillStyle = g;
+      c.fillRect(0, 0, 128, 128);
+    }
+    let L = 0, H = 0, avant = 0;
+    const etoiles = [];
+    const fuite = { x: 0, y: 0 }, regard = { x: 0, y: 0 };
+    let vise = { x: 0, y: 0 };
 
-    const naitre = (p = {}) => Object.assign(p, {
-      z: Math.random() ** 1.8,
-      x: Math.random(), y: Math.random(),
-      vx: (Math.random() - 0.5) * 0.00012, vy: -(0.00004 + Math.random() * 0.0001),
-      phase: Math.random() * Math.PI * 2,
-      pouls: 0.6 + Math.random() * 1.6,
+    const naitre = (s = {}, loin = true) => Object.assign(s, {
+      x: (Math.random() - 0.5) * 3.4, y: (Math.random() - 0.5) * 3.4,
+      z: loin ? 1 : 0.05 + Math.random() * 0.95,
     });
     const dimensionner = () => {
       const dpr = Math.min(devicePixelRatio || 1, 2);
       L = boite.clientWidth; H = boite.clientHeight;
       toile.width = L * dpr; toile.height = H * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.round(Math.min(480, L * H / densite));
-      while (points.length < n) points.push(naitre());
-      points.length = n;
-      points.sort((a, b) => a.z - b.z);
-    };
-    const dessiner = (t) => {
-      ctx.clearRect(0, 0, L, H);
-      ctx.globalCompositeOperation = 'lighter';
-      regard.x += (vise.x - regard.x) * 0.04;
-      regard.y += (vise.y - regard.y) * 0.04;
-      for (const p of points) {
-        const vitesse = 0.3 + p.z * 1.7;
-        p.x += (p.vx + Math.sin(t / 2600 + p.phase) * 0.00006) * vitesse;
-        p.y += (p.vy + Math.cos(t / 3100 + p.phase) * 0.00004) * vitesse;
-        if (p.y < -0.08 || p.x < -0.08 || p.x > 1.08) { naitre(p); p.y = 1.06; }
-        const decal = 6 + p.z * 46;
-        const x = p.x * L - regard.x * decal;
-        const y = p.y * H - regard.y * decal;
-        const taille = 2.5 + p.z * p.z * 46;
-        const scintille = 0.55 + 0.45 * Math.sin(t / 1000 * p.pouls + p.phase);
-        ctx.globalAlpha = Math.min(1, (0.4 + p.z * 0.75) * scintille);
-        ctx.drawImage(p.z > 0.72 ? floue : nette, x - taille / 2, y - taille / 2, taille, taille);
-      }
-      ctx.globalAlpha = 1;
-    };
-
-    /* Variante « espace » (?espace dans l'adresse) : les étoiles viennent du fond,
-       depuis derrière la VSL, et grossissent en filant vers l'écran. */
-    const espace = new URLSearchParams(location.search).has('espace');
-    const fuite = { x: 0, y: 0 };
-    let avant = 0;
-    const etoile = (s = {}, loin = true) => Object.assign(s, {
-      x: (Math.random() - 0.5) * 3.4, y: (Math.random() - 0.5) * 3.4,
-      z: loin ? 1 : 0.05 + Math.random() * 0.95, e: true,
-    });
-    const placerFuite = () => {
+      const n = Math.round(Math.min(480, L * H / 3200));
+      while (etoiles.length < n) etoiles.push(naitre({}, false));
+      etoiles.length = n;
       const r = boite.getBoundingClientRect();
       const v = document.querySelector('.vsl')?.getBoundingClientRect();
       fuite.x = v ? v.left + v.width / 2 - r.left : L / 2;
       fuite.y = v ? v.top + v.height / 2 - r.top : H / 2;
     };
-    const dessinerEspace = (t) => {
+    const dessiner = (t) => {
       const dt = Math.min(50, t - avant || 16); avant = t;
       ctx.clearRect(0, 0, L, H);
       ctx.globalCompositeOperation = 'lighter';
+      ctx.strokeStyle = '#fff';
+      ctx.lineCap = 'round';
       regard.x += (vise.x - regard.x) * 0.04;
       regard.y += (vise.y - regard.y) * 0.04;
       const cx = fuite.x - regard.x * 60, cy = fuite.y - regard.y * 60;
       const f = Math.max(L, H) * 0.32;
-      ctx.lineCap = 'round';
-      for (const s of points) {
-        if (!s.e) etoile(s, false);
+      for (const s of etoiles) {
         const pz = s.z;
-        s.z -= dt * 0.00011;
+        s.z -= dt * 0.00003;
         const x = cx + (s.x / s.z) * f, y = cy + (s.y / s.z) * f;
-        if (s.z <= 0.02 || x < -40 || x > L + 40 || y < -40 || y > H + 40) { etoile(s); continue; }
+        if (s.z <= 0.02 || x < -40 || x > L + 40 || y < -40 || y > H + 40) { naitre(s); continue; }
         const px = cx + (s.x / pz) * f, py = cy + (s.y / pz) * f;
         const pres = 1 - s.z;
         ctx.globalAlpha = Math.min(1, pres * pres * 1.4 + 0.3);
-        ctx.strokeStyle = '#fff';
         ctx.lineWidth = 1 + pres * pres * 3.4;
         ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(x, y); ctx.stroke();
         if (pres > 0.55) {
           const taille = pres * pres * 26;
-          ctx.drawImage(floue, x - taille / 2, y - taille / 2, taille, taille);
+          ctx.drawImage(halo, x - taille / 2, y - taille / 2, taille, taille);
         }
       }
       ctx.globalAlpha = 1;
     };
 
     dimensionner();
-    if (espace) placerFuite();
-    new ResizeObserver(() => { dimensionner(); if (espace) placerFuite(); }).observe(boite);
-    const peindre = espace ? dessinerEspace : dessiner;
-    if (calme) { peindre(0); return; }
-    let visible = false, boucle = 0;
-    const tour = (t) => { peindre(t); boucle = visible ? requestAnimationFrame(tour) : 0; };
-    new IntersectionObserver(([e]) => {
-      visible = e.isIntersecting;
-      if (visible && !boucle) boucle = requestAnimationFrame(tour);
-    }).observe(boite);
-  });
+    new ResizeObserver(dimensionner).observe(boite);
+    if (calme) dessiner(0);
+    else {
+      addEventListener('pointermove', (e) => {
+        vise = { x: e.clientX / innerWidth - 0.5, y: e.clientY / innerHeight - 0.5 };
+      }, { passive: true });
+      let visible = false, boucle = 0;
+      const tour = (t) => { dessiner(t); boucle = visible ? requestAnimationFrame(tour) : 0; };
+      new IntersectionObserver(([e]) => {
+        visible = e.isIntersecting;
+        if (visible && !boucle) boucle = requestAnimationFrame(tour);
+      }).observe(boite);
+    }
+  }
 
   if (calme) return;
 
