@@ -1008,18 +1008,6 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
   isolation: isolate;
 }
-.appel-arc {
-  position: absolute;
-  left: 50%;
-  top: 58%;
-  width: 130%;
-  aspect-ratio: 1;
-  translate: -50% calc((1 - var(--p, 1)) * 25%);
-  z-index: -1;
-  border-radius: 50%;
-  border-top: 1.5px solid var(--copper);
-  background: radial-gradient(circle at 50% 0%, rgba(137, 7, 37, 0.85), transparent 35%);
-}
 .appel .espace { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; }
 .appel .etiquette { background: transparent; border-color: #fff; color: #fff; }
 .appel h2 {
@@ -1031,8 +1019,6 @@ a { color: inherit; text-decoration: none; }
 }
 .appel h2 em { font-style: italic; color: #fff; text-decoration: underline; text-decoration-color: var(--copper); text-decoration-thickness: 0.08em; text-underline-offset: 0.12em; }
 .appel p { max-width: 34rem; margin: 1.2rem auto 0; color: #bdbdbd; }
-.btn--blanc { border: 1.5px solid #fff; background: transparent; color: #fff; }
-.btn--blanc:hover { background: #FFFFFF; color: var(--noir); }
 
 
 .pied { padding: 3rem 0 2.5rem; font-size: 0.875rem; color: var(--ink-faint); }
