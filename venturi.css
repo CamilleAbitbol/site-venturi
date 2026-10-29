@@ -156,7 +156,7 @@ a { color: inherit; text-decoration: none; }
 
 .hero {
   position: relative;
-  padding: clamp(8rem, 14vw, 10.5rem) 0 clamp(4rem, 8vw, 6rem);
+  padding: clamp(8rem, 14vw, 10.5rem) 0 clamp(2.5rem, 5vw, 3.5rem);
   text-align: center;
   isolation: isolate;
   overflow: clip;
@@ -380,7 +380,7 @@ a { color: inherit; text-decoration: none; }
    ------------------------------------------------------------------------ */
 
 .defile {
-  padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+  padding: 0.75rem 0 clamp(2.5rem, 5vw, 3.5rem);
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
