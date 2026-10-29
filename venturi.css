@@ -1021,15 +1021,6 @@ a { color: inherit; text-decoration: none; }
   background: radial-gradient(circle at 50% 0%, rgba(137, 7, 37, 0.85), transparent 35%);
 }
 .appel .espace { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; }
-.appel-points {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1.3px);
-  background-size: 22px 22px;
-  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, #000, transparent 70%);
-  mask-image: radial-gradient(ellipse at 50% 0%, #000, transparent 70%);
-}
 .appel .etiquette { background: transparent; border-color: #fff; color: #fff; }
 .appel h2 {
   margin-top: 1.4rem;
