@@ -208,20 +208,6 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 -40px 90px -30px rgba(137, 7, 37, 0.75);
 }
 
-.etoile {
-  position: absolute;
-  z-index: -1;
-  width: 14px;
-  height: 14px;
-  color: var(--copper);
-  animation: scintille 3.2s ease-in-out infinite;
-}
-.etoile--noire { color: var(--ink); width: 10px; height: 10px; }
-@keyframes scintille {
-  0%, 100% { opacity: 1; transform: scale(1) rotate(0); }
-  50% { opacity: 0.25; transform: scale(0.6) rotate(45deg); }
-}
-
 .pilule-hero {
   display: inline-flex;
   align-items: center;
@@ -327,14 +313,15 @@ a { color: inherit; text-decoration: none; }
   animation: vsl-respire 8s ease-in-out infinite alternate;
 }
 @keyframes vsl-respire { to { transform: scale(1.12) translateY(-3%); } }
-.vsl::after {
-  content: "";
+/* Lucioles proches et lointaines : dessinées par anim.js */
+.lucioles {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1.3px);
-  background-size: 20px 20px;
+  width: 100%;
+  height: 100%;
 }
+.arc .lucioles { z-index: 1; border-radius: 50%; clip-path: circle(49.8%); }
 .vsl-contenu {
   position: absolute;
   inset: 0;

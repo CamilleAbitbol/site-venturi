@@ -12,8 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,500;0,600;0,700;0,800;0,900;1,800;1,900&family=Bricolage+Grotesque:wght@600;700;900&family=Sora:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="kit.css?v=1793275164">
-  <link rel="stylesheet" href="venturi.css?v=1793275164">
+  <link rel="stylesheet" href="kit.css?v=1793277945">
+  <link rel="stylesheet" href="venturi.css?v=1793277945">
 </head>
 <body>
 
@@ -46,9 +46,7 @@
     <section class="hero">
       <div class="trame" aria-hidden="true"></div>
       <div class="trame-vive" aria-hidden="true"></div>
-      <div class="arc" aria-hidden="true"><svg viewBox="0 0 1000 1000"><circle cx="500" cy="500" r="499" pathLength="3200"/></svg></div>
-      <svg class="etoile etoile--noire" viewBox="0 0 24 24" style="left:21%;top:44%;animation-delay:-1.2s" aria-hidden="true"><use href="#etoile"/></svg>
-      <svg class="etoile etoile--noire" viewBox="0 0 24 24" style="right:23%;top:50%;animation-delay:-0.6s" aria-hidden="true"><use href="#etoile"/></svg>
+      <div class="arc" aria-hidden="true"><canvas class="lucioles" data-densite="9000"></canvas><svg viewBox="0 0 1000 1000"><circle cx="500" cy="500" r="499" pathLength="3200"/></svg></div>
 
       <div class="conteneur">
         <span class="pilule-hero revele" style="--i:2"><b>Offert</b> Un audit de votre digital</span>
@@ -63,6 +61,7 @@
         <h2 class="etape-titre revele"><b>Étape 1/2 :</b> regardez la vidéo</h2>
         <div class="vsl-scene">
           <div class="vsl" role="region" aria-label="Vidéo de présentation">
+            <canvas class="lucioles" aria-hidden="true"></canvas>
             <div class="vsl-contenu">
               <button class="lecture" type="button" aria-label="Lire la vidéo"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 3.5v17a1 1 0 0 0 1.5.86l14-8.5a1 1 0 0 0 0-1.72l-14-8.5A1 1 0 0 0 6 3.5z"/></svg></button>
               <span class="vsl-legende">Votre vidéo ici</span>
@@ -324,6 +323,6 @@
     </div>
   </footer>
 
-  <script src="anim.js?v=1793275164"></script>
+  <script src="anim.js?v=1793277945"></script>
 </body>
 </html>

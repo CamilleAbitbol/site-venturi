@@ -85,6 +85,84 @@
   }, { passive: true });
   auDefilement();
 
+  /* 3 bis. Lucioles (grand cercle du hero et VSL) : chaque point a une profondeur z
+            (0 = loin, 1 = près) qui règle sa taille, son flou, sa vitesse et son
+            décalage sous le curseur. */
+  const lueur = (coeur, halo) => {
+    const s = document.createElement('canvas');
+    s.width = s.height = 128;
+    const c = s.getContext('2d');
+    const g = c.createRadialGradient(64, 64, 0, 64, 64, 64);
+    g.addColorStop(0, `rgba(255,255,255,${coeur})`);
+    g.addColorStop(0.18, `rgba(255,236,214,${halo})`);
+    g.addColorStop(1, 'rgba(255,236,214,0)');
+    c.fillStyle = g;
+    c.fillRect(0, 0, 128, 128);
+    return s;
+  };
+  const nette = lueur(1, 0.55);
+  const floue = lueur(0.35, 0.22);
+  let vise = { x: 0, y: 0 };
+  if (!calme) addEventListener('pointermove', (e) => {
+    vise = { x: e.clientX / innerWidth - 0.5, y: e.clientY / innerHeight - 0.5 };
+  }, { passive: true });
+
+  document.querySelectorAll('.lucioles').forEach((toile) => {
+    const ctx = toile.getContext('2d');
+    const boite = toile.parentElement;
+    const densite = +toile.dataset.densite || 4200;
+    let L = 0, H = 0, points = [];
+    const regard = { x: 0, y: 0 };
+
+    const naitre = (p = {}) => Object.assign(p, {
+      z: Math.random() ** 1.8,
+      x: Math.random(), y: Math.random(),
+      vx: (Math.random() - 0.5) * 0.00012, vy: -(0.00004 + Math.random() * 0.0001),
+      phase: Math.random() * Math.PI * 2,
+      pouls: 0.6 + Math.random() * 1.6,
+    });
+    const dimensionner = () => {
+      const dpr = Math.min(devicePixelRatio || 1, 2);
+      L = boite.clientWidth; H = boite.clientHeight;
+      toile.width = L * dpr; toile.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const n = Math.round(Math.min(160, L * H / densite));
+      while (points.length < n) points.push(naitre());
+      points.length = n;
+      points.sort((a, b) => a.z - b.z);
+    };
+    const dessiner = (t) => {
+      ctx.clearRect(0, 0, L, H);
+      ctx.globalCompositeOperation = 'lighter';
+      regard.x += (vise.x - regard.x) * 0.04;
+      regard.y += (vise.y - regard.y) * 0.04;
+      for (const p of points) {
+        const vitesse = 0.3 + p.z * 1.7;
+        p.x += (p.vx + Math.sin(t / 2600 + p.phase) * 0.00006) * vitesse;
+        p.y += (p.vy + Math.cos(t / 3100 + p.phase) * 0.00004) * vitesse;
+        if (p.y < -0.08 || p.x < -0.08 || p.x > 1.08) { naitre(p); p.y = 1.06; }
+        const decal = 6 + p.z * 46;
+        const x = p.x * L - regard.x * decal;
+        const y = p.y * H - regard.y * decal;
+        const taille = 3 + p.z * p.z * 34;
+        const scintille = 0.55 + 0.45 * Math.sin(t / 1000 * p.pouls + p.phase);
+        ctx.globalAlpha = (0.25 + p.z * 0.6) * scintille;
+        ctx.drawImage(p.z > 0.72 ? floue : nette, x - taille / 2, y - taille / 2, taille, taille);
+      }
+      ctx.globalAlpha = 1;
+    };
+
+    dimensionner();
+    new ResizeObserver(dimensionner).observe(boite);
+    if (calme) { dessiner(0); return; }
+    let visible = false, boucle = 0;
+    const tour = (t) => { dessiner(t); boucle = visible ? requestAnimationFrame(tour) : 0; };
+    new IntersectionObserver(([e]) => {
+      visible = e.isIntersecting;
+      if (visible && !boucle) boucle = requestAnimationFrame(tour);
+    }).observe(boite);
+  });
+
   if (calme) return;
 
   /* 4. Trame du hero qui s'éclaire sous le curseur */
